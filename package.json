@@ -1,0 +1,22 @@
+{
+  "name": "myflix-client",
+  "version": "1.0.0",
+  "description": "This is the client for my myFlix app.",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wentdavid/myFlix-client.git"
+  },
+  "keywords": [
+    "myflix"
+  ],
+  "author": "David Went",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wentdavid/myFlix-client/issues"
+  },
+  "homepage": "https://github.com/wentdavid/myFlix-client#readme"
+}
