@@ -9,7 +9,7 @@ export const MainView = () => {
   const fetchMovies = async () => {
     try {
       const response = await 
-    fetch('http://localhost:3000/movies');
+    fetch('https://gleansdb01.herokuapp.com/');
       const movies = await response.json();
       setMovies(movies);
     } catch (error) {
