@@ -5,23 +5,27 @@ import { MovieView } from "../movie-view/movie-view";
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  
-  const fetchMovies = async () => {
-    try {
-      const response = await 
-    fetch('https://gleansdb01.herokuapp.com/');
-      const movies = await response.json();
-      setMovies(movies);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
+    useEffect(() => {
+      fetch("https://gleansdb01.herokuapp.com/")
+        .then((response) => response.json())
+        .then((data) => {
+          const moviesFromApi = data.docs.map((doc) => {
+            return {
+              id: doc.key,
+              title: doc.title,
+              //image: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,//
+              author: doc.author_name?.[0],
+            };
+          });
+
+          setMovies(moviesFromApi);
+        });
+    }, []);
 
 
+    
   if (selectedMovie) {
     return ( 
       <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
