@@ -24,20 +24,52 @@ export const MainView = () => {
         });
     }, []);
 
+ if (!user) {
+   return <LoginView onLoggedIn={(user) => setUser(user)} />;
+ }
 
-    
   if (selectedMovie) {
     return ( 
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+      <>
+        <button
+          onClick={() => {
+            setUser(null);
+          }}
+        >
+          Log out
+        </button>
+        <MovieView 
+        movie={selectedMovie} 
+        onBackClick={() => setSelectedMovie(null)}
+        /> 
+      </>
     );
   }
 
   if (movies.length === 0) {
-    return <div>The list is empty!</div>;
+    return (
+      <>
+        <button
+          onClick={() => {
+            setUser(null);
+          }}
+        >
+          Log out
+        </button>
+        <div>The list is empty!</div>
+      </>
+    );
   }
 
   return (
     <div>
+      <button
+        onClick={() => {
+          setUser(null);
+        }}
+      >
+        Log out
+      </button>
       {movies.map((movie) => (
         <MovieCard 
         key={movie.id} 
