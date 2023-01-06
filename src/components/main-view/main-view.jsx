@@ -50,6 +50,7 @@ export const MainView = () => {
           onClick={() => {
             setUser(null);
             setToken(null);
+            localStorageclear();
           }}
         >
           Log out
@@ -69,6 +70,7 @@ export const MainView = () => {
           onClick={() => {
             setUser(null);
             setToken(null);
+            localStorageclear();
           }}
         >
           Log out
@@ -84,6 +86,7 @@ export const MainView = () => {
         onClick={() => {
           setUser(null);
           setToken(null);
+          localStorageclear();
         }}
       >
         Log out
