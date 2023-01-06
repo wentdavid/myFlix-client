@@ -3,6 +3,18 @@ import { useState } from "react";
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState(null);
+
+  if (!user) {
+    return (
+      <LoginView
+        onLoggedIn={(user, token) => {
+          setUser(user);
+          setToken(token);
+        }}
+      />
+    );
+  }
 
   const handleSubmit = (event) => {
     // this prevents the default behavior of the form which is to reload the entire page
