@@ -43,6 +43,7 @@ export const MainView = () => {
         <button
           onClick={() => {
             setUser(null);
+            setToken(null);
           }}
         >
           Log out
@@ -61,6 +62,7 @@ export const MainView = () => {
         <button
           onClick={() => {
             setUser(null);
+            setToken(null);
           }}
         >
           Log out
@@ -75,6 +77,7 @@ export const MainView = () => {
       <button
         onClick={() => {
           setUser(null);
+          setToken(null);
         }}
       >
         Log out
