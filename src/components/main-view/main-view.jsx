@@ -6,23 +6,32 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
+  if (!user) {
+    return (
+      <LoginView 
+       onLoggedIn={(user, token) => {
+        setUser(user);
+        setToken(token);
+      }}
+    />
+   );
+  }
 
     useEffect(() => {
-      fetch("https://gleansdb01.herokuapp.com/")
+      if (!token) {
+        return;
+      }
+
+      fetch("https://gleansdb01.herokuapp.com/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
         .then((response) => response.json())
         .then((data) => {
-          const moviesFromApi = data.docs.map((doc) => {
-            return {
-              id: doc.key,
-              title: doc.title,
-              //image: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,//
-              author: doc.author_name?.[0],
-            };
-          });
-
-          setMovies(moviesFromApi);
+          console.log(data);
         });
-    }, []);
+    }, [token]);
 
  if (!user) {
    return <LoginView onLoggedIn={(user) => setUser(user)} />;
