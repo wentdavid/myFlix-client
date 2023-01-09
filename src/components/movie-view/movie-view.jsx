@@ -1,52 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  CardImg,
+  CardBody,
+} from "react-bootstrap";
 
 export const MovieView = ({ movie, onBackClick }) => {
-    return (
-      <div>
-        <div>
-          <img src={movie.ImagePath} />
-        </div>
-        <div>
-          <span>Title: </span>
-          <span>{movie.Title}</span>
-        </div>
-        <div>
-          <span>Description: </span>
-          <span>{movie.Description}</span>
-        </div>
-        <div>
-          <span>Genre: </span>
-          <span>{movie.Genre.Name}</span>
-        </div>
-        <div>
-          <span>Genre Description: </span>
-          <span>{movie.Genre.Description}</span>
-        </div>
-        <div>
-          <span>Director: </span>
-          <span>{movie.Director.Name}</span>
-        </div>
-        <div>
-          <span>Bio: </span>
-          <span>{movie.Director.Bio}</span>
-        </div>
-        <div>
-          <span>Birth: </span>
-          <span>{movie.Director.Birth}</span>
-        </div>
-        <div>
-          <span>Death: </span>
-          <span>{movie.Director.Death}</span>
-        </div>
-        <div>
-          <span>Featured: </span>
-          <span>{movie.Featured}</span>
-        </div>
-        <button onClick={onBackClick}>Back</button>
-      </div>
-    );
-  };
+  return (
+    <Card style={{ width: "18rem" }}>
+      <CardImg variant="top" src={movie.ImagePath} />
+      <CardBody>
+        <CardTitle>{movie.Title}</CardTitle>
+        <CardText>{movie.Description}</CardText>
+        <CardText>Genre: {movie.Genre.Name}</CardText>
+        <CardText>Genre Description: {movie.Genre.Description}</CardText>
+        <CardText>Director: {movie.Director.Name}</CardText>
+        <CardText>Bio: {movie.Director.Bio}</CardText>
+        <CardText>Birth: {movie.Director.Birth}</CardText>
+        <CardText>Death: {movie.Director.Death}</CardText>
+        <CardText>Featured: {movie.Featured}</CardText>
+        <Button variant="primary" onClick={onBackClick}>
+          Back
+        </Button>
+      </CardBody>
+    </Card>
+  );
+};
 
 MovieView.propTypes = {
   movie: PropTypes.shape({

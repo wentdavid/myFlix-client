@@ -2,7 +2,15 @@ import { useState, useEffect, useMemo } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
-import { Row, Col } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  FormControl,
+  Button,
+  Card,
+} from "react-bootstrap";
 
 import "./index.scss";
 
@@ -51,66 +59,62 @@ export const MainView = () => {
 
   if (selectedMovie) {
     return (
-      <>
-        <button
-          onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorageclear();
-          }}
-        >
-          Log out
-        </button>
+    <>
+    <Button variant="secondary" onClick={() => {
+      setUser(null);
+      setToken(null);
+      localStorageclear();
+      }}
+      >
+        Log out
+        </Button>
         <MovieView
-          movie={selectedMovie}
-          onBackClick={() => setSelectedMovie(null)}
+        movie={selectedMovie} onBackClick={() => setSelectedMovie(null)}
         />
-      </>
-    );
-  }
+        </>
+        );
+      }
 
-  if (movies.length === 0) {
-    return (
-      <>
-        <button
-          onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorageclear();
-          }}
-        >
-          Log out
-        </button>
-        <div>The list is empty!</div>
-      </>
-    );
-  }
-
-  return (
-    <Row>
-      <Col xs={12}>
-      <button
-        onClick={() => {
+      if (movies.length === 0) {
+        return (
+        <>
+        <Button variant="secondary" onClick={() => {
           setUser(null);
           setToken(null);
           localStorageclear();
-        }}
-      >
-        Log out
-      </button>
-      </Col>
-
-      {movies.map((movie) => (
-        <Col xs={12} md={6} lg={4}>
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(movie);
           }}
-        />
-        </Col>
-      ))}
-      </Row>
-  );
-};
+          >
+            Log out
+            </Button>
+            <div>The list is empty!</div>
+            </>
+            );
+          }
+          
+          return (
+          <Row>
+            <Col xs={12}>
+              <Button variant="secondary" onClick={() => {
+                setUser(null);
+                setToken(null);
+                localStorageclear();
+                }}
+                >
+                  Log out
+                  </Button>
+                  </Col>
+                  {movies.map((movie) => (
+                  <Col xs={12} md={6} lg={4}>
+                    <Card>
+                      <MovieCard
+                      key={movie.id}
+                      movie={movie}
+                      onMovieClick={(newSelectedMovie) => {setSelectedMovie(movie);
+                      }}
+                      />
+                      </Card>
+                      </Col>
+                      ))}
+                      </Row>
+                      );
+                    };
