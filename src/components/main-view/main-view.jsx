@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react"; 
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -9,7 +9,7 @@ export const MainView = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedUser = JSON.parse(localStorage.getItem("user")); 
   const storedToken = localStorage.getItem("token");
 
   useEffect(() => {
@@ -45,10 +45,6 @@ export const MainView = () => {
         setMovies(movies);
       });
   }, [token]);
-
-  if (!user) {
-    return <LoginView onLoggedIn={(user) => setUser(user)} />;
-  }
 
   if (selectedMovie) {
     return (
