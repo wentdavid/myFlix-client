@@ -14,7 +14,7 @@ export const LoginView = ({ onLoggedIn }) => {
       secret: password,
     };
 
-    fetch("https://YOUR_API_URL/login/", {
+    fetch("https://gleansdb01.herokuapp.com/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
