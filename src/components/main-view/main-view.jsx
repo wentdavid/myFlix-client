@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
+import { Row, Col } from "react-bootstrap";
 
 import "./index.scss";
 
@@ -86,7 +87,8 @@ export const MainView = () => {
   }
 
   return (
-    <div>
+    <Row>
+      <Col xs={12}>
       <button
         onClick={() => {
           setUser(null);
@@ -96,7 +98,10 @@ export const MainView = () => {
       >
         Log out
       </button>
+      </Col>
+
       {movies.map((movie) => (
+        <Col xs={12} md={6} lg={4}>
         <MovieCard
           key={movie.id}
           movie={movie}
@@ -104,7 +109,8 @@ export const MainView = () => {
             setSelectedMovie(movie);
           }}
         />
+        </Col>
       ))}
-    </div>
+      </Row>
   );
 };
