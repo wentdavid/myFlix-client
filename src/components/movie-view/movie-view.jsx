@@ -1,3 +1,6 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
 export const MovieView = ({ movie, onBackClick }) => {
     return (
       <div>
@@ -44,3 +47,22 @@ export const MovieView = ({ movie, onBackClick }) => {
       </div>
     );
   };
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.oneOfType([PropTypes.string, PropTypes.null]),
+      Description: PropTypes.oneOfType([PropTypes.string, PropTypes.null]),
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.oneOfType([PropTypes.string, PropTypes.null]),
+      Bio: PropTypes.oneOfType([PropTypes.string, PropTypes.null]),
+      Birth: PropTypes.oneOfType([PropTypes.string, PropTypes.null]),
+      Death: PropTypes.oneOfType([PropTypes.string, PropTypes.null]),
+    }).isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
+};
