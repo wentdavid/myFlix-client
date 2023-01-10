@@ -34,16 +34,7 @@ export const MainView = () => {
     }
   }, []);
 
-  if (!user) {
-    return (
-      <LoginView
-        onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }}
-      />
-    );
-  }
+
 
   useEffect(() => {
     if (!token) {
