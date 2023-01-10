@@ -21,8 +21,8 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  
-  const storedUser = JSON.parse(localStorage.getItem("user")); 
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
 
   useEffect(() => {
@@ -33,8 +33,6 @@ export const MainView = () => {
       setToken(storedToken);
     }
   }, []);
-
-
 
   useEffect(() => {
     if (!token) {
@@ -50,64 +48,60 @@ export const MainView = () => {
       });
   }, [token]);
 
-  if (selectedMovie) {
-    return (
-    <>
-    <Button variant="secondary" onClick={() => {
-      setUser(null);
-      setToken(null);
-      localStorage.clear();
-      }}
-      >
-        Log out
-        </Button>
-        <MovieView
-        movie={selectedMovie} onBackClick={() => setSelectedMovie(null)}
-        />
-        </>
-        );
-      }
-
-      if (movies.length === 0) {
-        return (
-        <>
-        <Button variant="secondary" onClick={() => {
-          setUser(null);
-          setToken(null);
-          localStorage.clear();
-          }}
-          >
-            Log out
-            </Button>
-            <div>The list is empty!</div>
-            </>
-            );
-          }
-          
-          return (
-          <Row>
-            <Col xs={12}>
-              <Button variant="secondary" onClick={() => {
-                setUser(null);
-                setToken(null);
-                localStorage.clear();
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {!user ? (
+            <LoginView
+              onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+              }}
+            />
+          ) : (
+            <>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setUser(null);
+                  setToken(null);
+                  localStorage.clear();
                 }}
-                >
-                  Log out
-                  </Button>
-                  </Col>
+              >
+                Log out
+              </Button>
+              {selectedMovie ? (
+                <MovieView
+                  movie={selectedMovie}
+                  onBackClick={() => setSelectedMovie(null)}
+                />
+              ) : movies.length === 0 ? (
+                <div>The list is empty!</div>
+              ) : (
+                <Row>
                   {movies.map((movie) => (
-                  <Col xs={12} md={6} lg={4}>
-                    <Card>
-                      <MovieCard
-                      key={movie.id}
-                      movie={movie}
-                      onMovieClick={(newSelectedMovie) => {setSelectedMovie(movie);
-                      }}
-                      />
+                    <Col xs={12} md={6} lg={4}>
+                      <Card>
+                        <MovieCard
+                          key={movie.id}
+                          movie={movie}
+                          onMovieClick={(newSelectedMovie) => {
+                            setSelectedMovie(movie);
+                          }}
+                        />
                       </Card>
-                      </Col>
-                      ))}
-                      </Row>
-                      );
-                    };
+                    </Col>
+                  ))}
+                </Row>
+              )}
+            </>
+          )}
+        </Route>
+        <Route path="*">
+          <div>404 - Not Found</div>
+        </Route>
+      </Switch>
+    </Router>
+  );
+};
