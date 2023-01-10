@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 import {
   Card,
   Button,
@@ -24,9 +25,9 @@ export const MovieView = ({ movie, onBackClick }) => {
         <CardText>Birth: {movie.Director.Birth}</CardText>
         <CardText>Death: {movie.Director.Death}</CardText>
         <CardText>Featured: {movie.Featured}</CardText>
-        <Button variant="primary" onClick={onBackClick}>
-          Back
-        </Button>
+        <Link to="/">
+        <Button variant="primary" onClick={onBackClick}>Back</Button>
+        </Link>
       </CardBody>
     </Card>
   );
