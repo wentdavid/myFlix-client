@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react"; 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
