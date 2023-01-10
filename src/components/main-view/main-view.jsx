@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.scss";
+import "main-view.scss";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import "movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
