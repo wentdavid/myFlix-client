@@ -12,6 +12,64 @@ import {
 import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  // Fetch data for the logged in user
+  useEffect(() => {
+    fetch("https://sheltered-crag-54265.herokuapp.com/users")
+      .then((response) => response.json())
+      .then((data) => {
+        // Find the logged in user by filtering the list by username
+        const loggedInUser = data.find((user) => user.Username === username);
+        setIsFavorited(loggedInUser.FavoriteMovies.includes(movie._id));
+      });
+  }, []);
+
+  const handleFavorites = (event) => {
+    event.preventDefault();
+    if (isFavorited) {
+      // If movie is already in favorites, remove it
+      fetch("https://sheltered-crag-54265.herokuapp.com/users", {
+        method: "PUT",
+        body: JSON.stringify({
+          Username: username,
+          FavoriteMovies: user.FavoriteMovies.filter(
+            (m) => m._id !== movie._id
+          ),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.ok) {
+          setIsFavorited(false);
+          alert("Movie removed from favorites");
+        } else {
+          alert("Failed to remove movie from favorites");
+        }
+      });
+    } else {
+      // If movie is not in favorites, add it
+      fetch("https://sheltered-crag-54265.herokuapp.com/users", {
+        method: "PUT",
+        body: JSON.stringify({
+          Username: username,
+          FavoriteMovies: [...user.FavoriteMovies, movie._id],
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.ok) {
+          setIsFavorited(true);
+          alert("Movie added to favorites");
+        } else {
+          alert("Failed to add movie to favorites");
+        }
+      });
+    }
+  };
+
   return (
     <Card style={{ width: "18rem" }}>
       <CardImg variant="top" src={movie.ImagePath} />
@@ -26,8 +84,16 @@ export const MovieView = ({ movie, onBackClick }) => {
         <CardText>Death: {movie.Director.Death}</CardText>
         <CardText>Featured: {movie.Featured}</CardText>
         <Link to="/">
-        <Button variant="primary" onClick={onBackClick}>Back</Button>
+          <Button variant="primary" onClick={onBackClick}>
+            Back
+          </Button>
         </Link>
+        <Button
+          variant={favorited ? "danger" : "primary"}
+          onClick={handleFavorited}
+        >
+          {favorited ? "Remove from favorites" : "Add to favorites"}
+        </Button>
       </CardBody>
     </Card>
   );

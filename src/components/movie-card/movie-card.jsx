@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const handleFavoriteClick = () => {
+    setIsFavorited(!isFavorited);
+  }
+
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={movie.ImagePath} />
@@ -20,6 +26,12 @@ export const MovieCard = ({ movie, onMovieClick }) => {
             View Details
           </Button>
         </Link>
+        <Button
+          variant={isFavorited ? "danger" : "secondary"}
+          onClick={handleFavoriteClick}
+        >
+          {isFavorited ? "Unfavorite" : "Favorite"}
+        </Button>
       </Card.Body>
     </Card>
   );
