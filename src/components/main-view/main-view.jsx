@@ -49,7 +49,7 @@ export const MainView = () => {
       return;
     }
 
-    fetch("https://gleansdb01.herokuapp.com/", {
+    fetch("https://sheltered-crag-54265.herokuapp.com/", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
