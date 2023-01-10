@@ -64,7 +64,7 @@ export const MainView = () => {
     <Button variant="secondary" onClick={() => {
       setUser(null);
       setToken(null);
-      localStorageclear();
+      localStorage.clear();
       }}
       >
         Log out
@@ -82,7 +82,7 @@ export const MainView = () => {
         <Button variant="secondary" onClick={() => {
           setUser(null);
           setToken(null);
-          localStorageclear();
+          localStorage.clear();
           }}
           >
             Log out
@@ -98,7 +98,7 @@ export const MainView = () => {
               <Button variant="secondary" onClick={() => {
                 setUser(null);
                 setToken(null);
-                localStorageclear();
+                localStorage.clear();
                 }}
                 >
                   Log out
