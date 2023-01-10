@@ -93,6 +93,27 @@ const ProfileView = () => {
     });
   };
 
+  const handleRemoveMovie = (id) => {
+    fetch("https://sheltered-crag-54265.herokuapp.com/favorites", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        MovieId: id,
+      }),
+    }).then((response) => {
+      if (response.ok) {
+        alert("Movie has been removed from favorites");
+        window.location.reload();
+      } else {
+        alert("Unable to remove movie from favorites");
+      }
+    });
+  };
+
+  
+
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -146,7 +167,14 @@ const ProfileView = () => {
       <div>
         <h3>Favorite Movies</h3>
         {favoriteMovies.map((m) => (
-          <MovieCard key={m._id} movie={m} />
+          <MovieCard key={m._id} movie={m}>
+            <Button
+              variant="primary"
+              onClick={() => handleRemoveMovie(movie._id)}
+            >
+              Remove from favorites
+            </Button>
+          </MovieCard>
         ))}
       </div>
     </>
