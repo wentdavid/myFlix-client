@@ -64,6 +64,29 @@ const ProfileView = () => {
     });
   };
 
+  const handleDeregister = (event) => {
+    // Prevent default behaviour
+    event.preventDefault();
+
+    // Send delete request to server
+    fetch("https://sheltered-crag-54265.herokuapp.com/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Username: username,
+      }),
+    }).then((response) => {
+      if (response.ok) {
+        alert("Deregistration successful");
+        window.location.reload();
+      } else {
+        alert("Deregistration failed");
+      }
+    });
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
@@ -95,6 +118,7 @@ const ProfileView = () => {
           required
         />
       </Form.Group>
+
       <Form.Group controlId="formBirthday">
         <Form.Label>Birthday:</Form.Label>
         <Form.Control
@@ -107,6 +131,9 @@ const ProfileView = () => {
 
       <Button variant="primary" type="submit">
         Save
+      </Button>
+      <Button variant="danger" type="button" onClick={handleDeregister}>
+        Deregister
       </Button>
     </Form>
   );
