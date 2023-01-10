@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import MovieCard from "./MovieCard";
 
 const ProfileView = () => {
   const [user, setUser] = useState({});
@@ -23,6 +24,11 @@ const ProfileView = () => {
         setBirthday(loggedInUser.Birthday);
       });
   }, []);
+
+  // Filter the movies array by the logged in user's favorite movies
+  let favoriteMovies = movies.filter((m) =>
+    user.FavoriteMovies.includes(m._id)
+  );
 
   // Handle input changes for the profile form
   const handleUsernameChange = (e) => {
@@ -88,54 +94,62 @@ const ProfileView = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={handleUsernameChange}
-          required
-        />
-      </Form.Group>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-      </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formEmail">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-        />
-      </Form.Group>
+        <Form.Group controlId="formEmail">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formBirthday">
-        <Form.Label>Birthday:</Form.Label>
-        <Form.Control
-          type="date"
-          value={birthday}
-          onChange={handleBirthdayChange}
-          required
-        />
-      </Form.Group>
+        <Form.Group controlId="formBirthday">
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control
+            type="date"
+            value={birthday}
+            onChange={handleBirthdayChange}
+            required
+          />
+        </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Save
-      </Button>
-      <Button variant="danger" type="button" onClick={handleDeregister}>
-        Deregister
-      </Button>
-    </Form>
+        <Button variant="primary" type="submit">
+          Save
+        </Button>
+        <Button variant="danger" type="button" onClick={handleDeregister}>
+          Deregister
+        </Button>
+      </Form>
+      <div>
+        <h3>Favorite Movies</h3>
+        {favoriteMovies.map((m) => (
+          <MovieCard key={m._id} movie={m} />
+        ))}
+      </div>
+    </>
   );
 };
 
