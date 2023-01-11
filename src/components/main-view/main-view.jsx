@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
+import { SignupView } from "./components/signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { Row, Col, Button, Card } from "react-bootstrap";
 
@@ -64,7 +65,7 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <SignupView />
+                    <SignupView onSignup={onSignup} />
                   </Col>
                 )}
               </>
