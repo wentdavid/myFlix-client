@@ -1,43 +1,36 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 import "./login-view.scss";
+
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  const handleSubmit = (event) => {
-    // this prevents the default behavior of the form which is to reload the entire page
-    event.preventDefault();
+const handleSubmit = (event) => {
+  event.preventDefault();
 
-    const data = {
+  axios
+    .post("https://sheltered-crag-54265.herokuapp.com/login", {
       access: username,
       secret: password,
-    };
-
-    fetch("https://sheltered-crag-54265.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Login response: ", data);
-        if (data.user) {
-          onLoggedIn(data.user, data.token);
-          history.push("/");
-        } else {
-          alert("No such user");
-        }
-      })
-      .catch((e) => {
-        alert("Something went wrong");
-      });
-  };
+    .then((response) => {
+      console.log("Login response: ", response);
+      if (response.data.user) {
+        onLoggedIn(response.data.user, response.data.token);
+        history.push("/");
+      } else {
+        alert("No such user");
+      }
+    })
+    .catch((e) => {
+      alert("Something went wrong");
+    });
+};
 
   return (
     <Form onSubmit={handleSubmit}>
