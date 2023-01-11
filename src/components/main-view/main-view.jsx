@@ -4,18 +4,12 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import {
-  Row,
-  Col,
-  Form,
-  FormGroup,
-  FormControl,
-  Button,
-  Card,
-} from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./main-view.scss";
+import axios from 'axios';
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -39,12 +33,15 @@ export const MainView = () => {
       return;
     }
 
-    fetch("https://sheltered-crag-54265.herokuapp.com/", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((movies) => {
-        setMovies(movies);
+    axios
+      .get("https://sheltered-crag-54265.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setMovies(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, [token]);
 
