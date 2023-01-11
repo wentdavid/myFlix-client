@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Redirect } from "react-router-dom";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -18,7 +19,7 @@ export const SignupView = () => {
       Birthday: birthday,
     };
 
-    fetch("https://sheltered-crag-54265.herokuapp.com/", {
+    fetch("https://sheltered-crag-54265.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -27,12 +28,16 @@ export const SignupView = () => {
     }).then((response) => {
       if (response.ok) {
         alert("Signup successful");
-        window.location.reload();
+        setRedirect(true);
       } else {
         alert("Signup failed");
       }
     });
   };
+
+  if(redirect) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -77,7 +82,7 @@ export const SignupView = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit
       </Button>
     </Form>
