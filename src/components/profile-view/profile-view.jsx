@@ -54,7 +54,7 @@ const ProfileView = () => {
       Birthday: birthday,
     };
 
-    fetch("https://sheltered-crag-54265.herokuapp.com/", {
+    fetch("https://sheltered-crag-54265.herokuapp.com/users", {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
@@ -75,7 +75,7 @@ const ProfileView = () => {
     event.preventDefault();
 
     // Send delete request to server
-    fetch("https://sheltered-crag-54265.herokuapp.com/", {
+    fetch("https://sheltered-crag-54265.herokuapp.com/users", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
