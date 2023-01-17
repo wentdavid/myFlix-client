@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,7 +37,7 @@ export const SignupView = () => {
   };
 
   if(redirect) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   return (
