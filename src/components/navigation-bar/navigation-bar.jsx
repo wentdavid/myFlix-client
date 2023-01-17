@@ -4,6 +4,15 @@ import "./navigation-bar.scss";
 import PropTypes from "prop-types";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
+  const handleLogout = () => {
+    // Clear the token from local storage
+    localStorage.removeItem("token");
+
+    // Call the onLoggedOut function to clear the user's token
+    onLoggedOut();
+  };
+
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -15,10 +24,10 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
           <Nav className="me-auto">
             {!user && (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link as={Link} to="/login-view">
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/signup">
+                <Nav.Link as={Link} to="/signup-view">
                   Signup
                 </Nav.Link>
               </>
