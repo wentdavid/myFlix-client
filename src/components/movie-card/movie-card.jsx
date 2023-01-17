@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
+import { Card, Button } from "react-bootstrap";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   const [isFavorited, setIsFavorited] = useState(false);
