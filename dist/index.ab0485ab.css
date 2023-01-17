@@ -12058,10 +12058,35 @@ textarea.form-control-lg {
   color: #fff !important;
 }
 
-.movie-logo {
+.movie-logo-top {
   width: 200px;
   margin: 0 auto;
-  padding-top: 30%;
+  padding-top: 40%;
+  animation: 2s ease-in-out 2 alternate logo-animation;
+  display: block;
+}
+
+@keyframes logo-animation {
+  0% {
+    transform: rotate(0)translate(0);
+  }
+
+  50% {
+    transform: rotate(0)translate(0, -20px);
+  }
+
+  100% {
+    transform: rotate(5deg)translate(10px);
+  }
+}
+
+.movie-logo-top:hover {
+  animation: 2s ease-in-out infinite alternate logo-animation;
+}
+
+.movie-logo-bottom {
+  width: 200px;
+  margin: 0 auto;
   display: block;
 }
 
@@ -12077,7 +12102,7 @@ textarea.form-control-lg {
 }
 
 .login-form {
-  width: 400px;
+  width: 350px;
   background-color: #262626;
   border-radius: 30px;
   margin: 0 auto;

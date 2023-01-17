@@ -1,9 +1,55 @@
-.movie-logo {
+.movie-logo-top {
     display: block;
     margin: 0 auto;
     width: 200px;
-    padding-top: 30%;
+    padding-top: 40%;
+    animation: logo-animation 2s ease-in-out infinite alternate;
+    animation-iteration-count: 2;
+    
+    }
+    
+    @keyframes logo-animation {
+        0% {
+            transform: rotate(0deg) translate(0, 0);
+        }
+    
+        50% {
+            transform: rotate(0deg) translate(0px, -20px);
+        }
+    
+        100% {
+            transform: rotate(5deg) translate(10px, 0);
+        }    
+    
 }
+
+.movie-logo-top:hover {
+    animation-play-state: running;
+    animation: logo-animation 2s ease-in-out infinite alternate;
+    
+    }
+    
+    @keyframes logo-animation {
+        0% {
+            transform: rotate(0deg) translate(0, 0);
+        }
+    
+        50% {
+            transform: rotate(0deg) translate(0px, -20px);
+        }
+    
+        100% {
+            transform: rotate(5deg) translate(10px, 0);
+        }
+    
+    }
+
+.movie-logo-bottom {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}
+
 
 .welcome-message {
     text-align: center;
@@ -17,7 +63,7 @@
 
 .login-form {
     background-color: #262626;
-    width: 400px;
+    width: 350px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 30px;

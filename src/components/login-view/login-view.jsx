@@ -34,12 +34,19 @@ const handleSubmit = (event) => {
 
 
   return (
-    <div>
+    <div className="parent-container">
       <img
-        src={require("../../../img/Navbar/MovieApp_Logo_Navbar.png")}
+        src={require("../../../img/Navbar/MovieApp_Logo_Animation_Top.png")}
         alt="movie logo"
-        className="movie-logo"
+        className="movie-logo-top"
       />
+
+      <img
+        src={require("../../../img/Navbar/MovieApp_Logo_Animation_Bottom.png")}
+        alt="movie logo"
+        className="movie-logo-bottom"
+      />
+
       <p className="welcome-message">Welcome to the Movie App</p>
 
       <Form onSubmit={handleSubmit} className="login-form">
