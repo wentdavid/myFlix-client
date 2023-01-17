@@ -16,6 +16,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
+        <img src="../img/Navbar/MovieApp_Logo_Navbar.png" alt="logo" />
         <Navbar.Brand as={Link} to="/">
           Movie App
         </Navbar.Brand>
