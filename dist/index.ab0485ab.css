@@ -12030,13 +12030,104 @@ textarea.form-control-lg {
 
 
 
+.navbar {
+  width: 100%;
+  background-color: #262626;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 0 15px -8px #fff;
+}
+
+.navbar-brand {
+  text-align: center;
+  font-size: 1.5em;
+  color: #fff !important;
+}
+
+.navbar-brand img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+  text-align: center;
+  margin-right: 20px;
+  font-size: 1.2em;
+  position: relative;
+  color: #fff !important;
+}
+
+.movie-logo {
+  width: 200px;
+  margin: 0 auto;
+  padding-top: 30%;
+  display: block;
+}
+
+.welcome-message {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.login-group {
+  margin-bottom: 20px;
+}
+
+.login-form {
+  width: 400px;
+  background-color: #262626;
+  border-radius: 30px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.login-form .form-control {
+  color: #fff;
+  background-color: #363636;
+  border: none;
+  border-radius: 10px;
+  transition: all .2s;
+}
+
+.login-form .form-control:hover {
+  color: #000;
+  background-color: #fff;
+  border: 3px solid #4682b4;
+}
+
+.login-form .form-control:focus {
+  border: 3px solid #4682b4;
+  box-shadow: 0 0 8px 1px #fff;
+}
+
+.login-form .form-label {
+  color: #fff;
+}
+
+.login-button {
+  width: 100%;
+  background-color: #fff;
+  border-color: #fff;
+  transition: all .2s;
+  border-radius: 30px !important;
+}
+
+.login-button:hover {
+  background-color: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 8px 1px #fff;
+}
 
 
 
 
 
-
-
+body {
+  background-color: #1a1a1a !important;
+}
 
 .my-flix {
   color: #4682b4;

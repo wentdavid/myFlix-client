@@ -32,31 +32,41 @@ const handleSubmit = (event) => {
     });
 };
 
+
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          minLength="3"
-          required
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          minLength="8"
-          required
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+    <div>
+      <img
+        src={require("../../../img/Navbar/MovieApp_Logo_Navbar.png")}
+        alt="movie logo"
+        className="movie-logo"
+      />
+      <p className="welcome-message">Welcome to the Movie App</p>
+
+      <Form onSubmit={handleSubmit} className="login-form">
+        <Form.Group className="login-group">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            minLength="3"
+            required
+          />
+        </Form.Group>
+        <Form.Group className="login-group">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength="8"
+            required
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" className="login-button">
+          Login
+        </Button>
+      </Form>
+    </div>
   );
 };

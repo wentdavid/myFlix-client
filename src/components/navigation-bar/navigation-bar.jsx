@@ -14,10 +14,13 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
 
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="#262626" className="navbar fixed-top" expand="sm">
       <Container>
-        <img src="../img/Navbar/MovieApp_Logo_Navbar.png" alt="logo" />
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" className="navbar-brand">
+          <img
+            src={require("../../../img/Navbar/MovieApp_Logo_Navbar.png")}
+            alt="logo"
+          />
           Movie App
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
