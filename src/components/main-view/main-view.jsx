@@ -99,12 +99,15 @@ export const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
-                  <Col md={8}>
+                  <>
+                  {movies.map(movie => <Col  key={movie._id} md={8}>
                     <MovieView movie={movie} />
-                  </Col>
-                )}
+                  </Col>)
+                }
               </>
-            }
+               )}
+          </>
+          }
           />
 
           <Route
