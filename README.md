@@ -12,6 +12,13 @@
       <li>View and edit your own profile</li>
       <li>Deregister (Delete Account)</li>
     </ul>
+    <h2>Views</h2>
+    <h3>Login View</h3>
+    <h3>Signup View</h3>
+    <h3>Main View</h3>
+    <h3>Movie View</h3>
+    <h3>Movie Card</h3>
+    <h3>Profile View</h3>
     <h2>Tech Stack</h2>
     <ul>
       <li>React</li>
