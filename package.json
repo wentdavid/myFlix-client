@@ -36,5 +36,8 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
     "process": "^0.11.10"
+  },
+  "node": {
+    "engine": ">=16.18.0 <17.0.0"
   }
 }
