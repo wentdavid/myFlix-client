@@ -4,7 +4,7 @@
   "description": "This is the client for my myFlix app.",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html --public-url /",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "source": "src/index.html",
@@ -24,8 +24,8 @@
   "dependencies": {
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
+    "parcel": "^2.8.2",
     "prop-types": "^15.8.1",
-    "parcel": "v2.0.0-rc.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
@@ -34,6 +34,7 @@
     "redux": "^4.2.0"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.2",
     "process": "^0.11.10"
   }
 }
