@@ -15,12 +15,14 @@ const handleSubmit = (event) => {
 
   axios
     .post("https://sheltered-crag-54265.herokuapp.com/login", {
-      access: username,
-      secret: password,
+      Username: username,
+      Password: password,
     })
     .then((response) => {
       console.log("Login response: ", response);
       if (response.data.user) {
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("token", response.data.token);
         onLoggedIn(response.data.user, response.data.token);
         history.push("/");
       } else {
@@ -28,7 +30,7 @@ const handleSubmit = (event) => {
       }
     })
     .catch((e) => {
-      alert("Something went wrong");
+      console.log("Login issue", e)
     });
 };
 
