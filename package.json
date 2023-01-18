@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "This is the client for my myFlix app.",
   "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "source": "src/index.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wentdavid/myFlix-client.git"
