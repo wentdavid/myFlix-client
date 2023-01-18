@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import {Button} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import "./movie-view.scss";
 
@@ -9,7 +10,12 @@ export const MovieView = ({ movie, onBackClick }) => {
 
   // Fetch data for the logged in user
   useEffect(() => {
-    fetch("https://sheltered-crag-54265.herokuapp.com/users")
+    fetch("https://sheltered-crag-54265.herokuapp.com/users", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    })
       .then((response) => response.json())
       .then((data) => {
         // Find the logged in user by filtering the list by username
@@ -82,10 +88,10 @@ export const MovieView = ({ movie, onBackClick }) => {
           </Button>
         </Link>
         <Button
-          variant={favorited ? "danger" : "primary"}
-          onClick={handleFavorited}
+          variant={isFavorited ? "danger" : "primary"}
+          onClick={handleFavorites}
         >
-          {favorited ? "Remove from favorites" : "Add to favorites"}
+          {isFavorited ? "Remove from favorites" : "Add to favorites"}
         </Button>
       </Card.Body>
     </Card>

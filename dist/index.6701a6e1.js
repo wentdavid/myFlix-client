@@ -43815,14 +43815,21 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactRouterDom = require("react-router-dom");
 var _reactBootstrap = require("react-bootstrap");
+var _card = require("react-bootstrap/Card");
+var _cardDefault = parcelHelpers.interopDefault(_card);
 var _movieViewScss = require("./movie-view.scss");
 var _s = $RefreshSig$();
 const MovieView = ({ movie , onBackClick  })=>{
     _s();
-    const [isFavorited, setIsFavorited] = useState(false);
+    const [isFavorited, setIsFavorited] = _react.useState(false);
     // Fetch data for the logged in user
-    useEffect(()=>{
-        fetch("https://sheltered-crag-54265.herokuapp.com/users").then((response)=>response.json()
+    _react.useEffect(()=>{
+        fetch("https://sheltered-crag-54265.herokuapp.com/users", {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }).then((response)=>response.json()
         ).then((data)=>{
             // Find the logged in user by filtering the list by username
             const loggedInUser = data.find((user)=>user.Username === username
@@ -43869,52 +43876,52 @@ const MovieView = ({ movie , onBackClick  })=>{
             } else alert("Failed to add movie to favorites");
         });
     };
-    return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
         style: {
             width: "18rem"
         },
         __source: {
             fileName: "src/components/movie-view/movie-view.jsx",
-            lineNumber: 74
+            lineNumber: 73
         },
         __self: undefined,
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardImg, {
+            /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
                 variant: "top",
                 src: movie.ImagePath,
                 __source: {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 75
+                    lineNumber: 74
                 },
                 __self: undefined
             }),
-            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardBody, {
+            /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                 __source: {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 76
+                    lineNumber: 75
                 },
                 __self: undefined,
                 children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardTitle, {
+                    /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                        __source: {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 76
+                        },
+                        __self: undefined,
+                        children: movie.Title
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 77
                         },
                         __self: undefined,
-                        children: movie.Title
+                        children: movie.Description
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardText, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 78
-                        },
-                        __self: undefined,
-                        children: movie.Description
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardText, {
-                        __source: {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 79
                         },
                         __self: undefined,
                         children: [
@@ -43922,10 +43929,10 @@ const MovieView = ({ movie , onBackClick  })=>{
                             movie.Genre.Name
                         ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardText, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 80
+                            lineNumber: 79
                         },
                         __self: undefined,
                         children: [
@@ -43933,10 +43940,10 @@ const MovieView = ({ movie , onBackClick  })=>{
                             movie.Genre.Description
                         ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardText, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 81
+                            lineNumber: 80
                         },
                         __self: undefined,
                         children: [
@@ -43944,10 +43951,10 @@ const MovieView = ({ movie , onBackClick  })=>{
                             movie.Director.Name
                         ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardText, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 82
+                            lineNumber: 81
                         },
                         __self: undefined,
                         children: [
@@ -43955,10 +43962,10 @@ const MovieView = ({ movie , onBackClick  })=>{
                             movie.Director.Bio
                         ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardText, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 83
+                            lineNumber: 82
                         },
                         __self: undefined,
                         children: [
@@ -43966,10 +43973,10 @@ const MovieView = ({ movie , onBackClick  })=>{
                             movie.Director.Birth
                         ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardText, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 84
+                            lineNumber: 83
                         },
                         __self: undefined,
                         children: [
@@ -43977,10 +43984,10 @@ const MovieView = ({ movie , onBackClick  })=>{
                             movie.Director.Death
                         ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.CardText, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 85
+                            lineNumber: 84
                         },
                         __self: undefined,
                         children: [
@@ -43992,7 +43999,7 @@ const MovieView = ({ movie , onBackClick  })=>{
                         to: "/",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 86
+                            lineNumber: 85
                         },
                         __self: undefined,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
@@ -44000,21 +44007,21 @@ const MovieView = ({ movie , onBackClick  })=>{
                             onClick: onBackClick,
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 87
+                                lineNumber: 86
                             },
                             __self: undefined,
                             children: "Back"
                         })
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                        variant: favorited ? "danger" : "primary",
-                        onClick: handleFavorited,
+                        variant: isFavorited ? "danger" : "primary",
+                        onClick: handleFavorites,
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 91
+                            lineNumber: 90
                         },
                         __self: undefined,
-                        children: favorited ? "Remove from favorites" : "Add to favorites"
+                        children: isFavorited ? "Remove from favorites" : "Add to favorites"
                     })
                 ]
             })
@@ -44067,7 +44074,7 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-router-dom":"jbMYE","react-bootstrap":"h2YVd","./movie-view.scss":"kvL93","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"kvL93":[function() {},{}],"054li":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-router-dom":"jbMYE","react-bootstrap/Card":"MoOk8","./movie-view.scss":"kvL93","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-bootstrap":"h2YVd"}],"kvL93":[function() {},{}],"054li":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$02dd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -44094,23 +44101,25 @@ const LoginView = ({ onLoggedIn  })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         _axiosDefault.default.post("https://sheltered-crag-54265.herokuapp.com/login", {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         }).then((response)=>{
             console.log("Login response: ", response);
             if (response.data.user) {
+                localStorage.setItem("user", JSON.stringify(response.data.user));
+                localStorage.setItem("token", response.data.token);
                 onLoggedIn(response.data.user, response.data.token);
                 history.push("/");
             } else alert("No such user");
         }).catch((e)=>{
-            alert("Something went wrong");
+            console.log("Login issue", e);
         });
     };
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         className: "parent-container",
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 37
+            lineNumber: 39
         },
         __self: undefined,
         children: [
@@ -44120,7 +44129,7 @@ const LoginView = ({ onLoggedIn  })=>{
                 className: "movie-logo-top",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 38
+                    lineNumber: 40
                 },
                 __self: undefined
             }),
@@ -44130,7 +44139,7 @@ const LoginView = ({ onLoggedIn  })=>{
                 className: "movie-logo-bottom",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 44
+                    lineNumber: 46
                 },
                 __self: undefined
             }),
@@ -44138,7 +44147,7 @@ const LoginView = ({ onLoggedIn  })=>{
                 className: "welcome-message",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 50
+                    lineNumber: 52
                 },
                 __self: undefined,
                 children: "Welcome to the Movie App"
@@ -44148,7 +44157,7 @@ const LoginView = ({ onLoggedIn  })=>{
                 className: "login-form",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 52
+                    lineNumber: 54
                 },
                 __self: undefined,
                 children: [
@@ -44156,14 +44165,14 @@ const LoginView = ({ onLoggedIn  })=>{
                         className: "login-group",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 53
+                            lineNumber: 55
                         },
                         __self: undefined,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 54
+                                    lineNumber: 56
                                 },
                                 __self: undefined,
                                 children: "Username"
@@ -44177,7 +44186,7 @@ const LoginView = ({ onLoggedIn  })=>{
                                 required: true,
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 55
+                                    lineNumber: 57
                                 },
                                 __self: undefined
                             })
@@ -44187,14 +44196,14 @@ const LoginView = ({ onLoggedIn  })=>{
                         className: "login-group",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 63
+                            lineNumber: 65
                         },
                         __self: undefined,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 64
+                                    lineNumber: 66
                                 },
                                 __self: undefined,
                                 children: "Password"
@@ -44208,7 +44217,7 @@ const LoginView = ({ onLoggedIn  })=>{
                                 required: true,
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 65
+                                    lineNumber: 67
                                 },
                                 __self: undefined
                             })
@@ -44220,7 +44229,7 @@ const LoginView = ({ onLoggedIn  })=>{
                         className: "login-button",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 73
+                            lineNumber: 75
                         },
                         __self: undefined,
                         children: "Login"
