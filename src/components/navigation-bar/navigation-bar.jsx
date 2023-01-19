@@ -28,10 +28,10 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
           <Nav className="me-auto">
             {!user && (
               <>
-                <Nav.Link as={Link} to="/login-view">
+                <Nav.Link as={Link} to="/login">
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/signup-view">
+                <Nav.Link as={Link} to="/signup">
                   Signup
                 </Nav.Link>
               </>
