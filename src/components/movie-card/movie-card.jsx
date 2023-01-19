@@ -21,7 +21,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
           <Button
             variant="primary"
             onClick={() => {
-              onMovieClick(movie);
+              //onMovieClick(movie);
             }}
           >
             View Details
