@@ -1,14 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  Button,
-  CardTitle,
-  CardText,
-  CardImg,
-  CardBody,
-} from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import { Button } from "react-bootstrap";
+
 import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
@@ -72,29 +67,29 @@ export const MovieView = ({ movie, onBackClick }) => {
 
   return (
     <Card style={{ width: "18rem" }}>
-      <CardImg variant="top" src={movie.ImagePath} />
-      <CardBody>
-        <CardTitle>{movie.Title}</CardTitle>
-        <CardText>{movie.Description}</CardText>
-        <CardText>Genre: {movie.Genre.Name}</CardText>
-        <CardText>Genre Description: {movie.Genre.Description}</CardText>
-        <CardText>Director: {movie.Director.Name}</CardText>
-        <CardText>Bio: {movie.Director.Bio}</CardText>
-        <CardText>Birth: {movie.Director.Birth}</CardText>
-        <CardText>Death: {movie.Director.Death}</CardText>
-        <CardText>Featured: {movie.Featured}</CardText>
+      <Card.Img variant="top" src={movie.ImagePath} />
+      <Card.Body>
+        <Card.Title>{movie.Title}</Card.Title>
+        <Card.Text>{movie.Description}</Card.Text>
+        <Card.Text>Genre: {movie.Genre.Name}</Card.Text>
+        <Card.Text>Genre Description: {movie.Genre.Description}</Card.Text>
+        <Card.Text>Director: {movie.Director.Name}</Card.Text>
+        <Card.Text>Bio: {movie.Director.Bio}</Card.Text>
+        <Card.Text>Birth: {movie.Director.Birth}</Card.Text>
+        <Card.Text>Death: {movie.Director.Death}</Card.Text>
+        <Card.Text>Featured: {movie.Featured}</Card.Text>
         <Link to="/">
           <Button variant="primary" onClick={onBackClick}>
             Back
           </Button>
         </Link>
         <Button
-          variant={favorited ? "danger" : "primary"}
-          onClick={handleFavorited}
+          variant={isFavorited ? "danger" : "primary"}
+          onClick={handleFavorites}
         >
-          {favorited ? "Remove from favorites" : "Add to favorites"}
+          {isFavorited ? "Remove from favorites" : "Add to favorites"}
         </Button>
-      </CardBody>
+      </Card.Body>
     </Card>
   );
 };
