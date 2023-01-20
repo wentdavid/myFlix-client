@@ -1,0 +1,117 @@
+.movie-logo-top {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    animation: logo-animation 1.2s ease-in-out infinite alternate;
+    animation-iteration-count: 2;
+
+}
+
+@keyframes logo-animation {
+    0% {
+        transform: rotate(0deg) translate(0, 0);
+    }
+
+    50% {
+        transform: rotate(0deg) translate(0px, -20px);
+    }
+
+    100% {
+        transform: rotate(5deg) translate(10px, 0);
+    }
+
+}
+
+.movie-logo-top:hover {
+    animation-play-state: running;
+    animation: logo-animation 2s ease-in-out infinite alternate;
+
+}
+
+@keyframes logo-animation {
+    0% {
+        transform: rotate(0deg) translate(0, 0);
+    }
+
+    50% {
+        transform: rotate(0deg) translate(0px, -20px);
+    }
+
+    100% {
+        transform: rotate(5deg) translate(10px, 0);
+    }
+
+}
+
+.movie-logo-bottom {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}
+
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.login-group {
+    margin-bottom: 20px;
+}
+
+.login-form {
+    background-color: #262626;
+    width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+
+
+.login-form .form-control {
+    background-color: #363636;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+.login-form .form-control:hover {
+    background-color: #ffffff;
+    border: 3px solid steelblue;
+    color: rgb(0, 0, 0);
+}
+
+.login-form .form-control:focus {
+    box-shadow: 0px 0px 8px 1px #ffffff;
+    border: 3px solid steelblue;
+}
+
+.login-form .form-label {
+    color: #fff;
+}
+
+.login-button {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    width: 100%;
+    transition: all 0.2s;
+    border-radius: 30px !important;
+}
+
+.login-button:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0px 0px 8px 1px #ffffff;
+}
+
+.search-filter-container {
+    visibility: hidden;
+}
+
+.parent-container {
+    text-align: center!important;
+}

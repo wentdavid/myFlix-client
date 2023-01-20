@@ -1,0 +1,121 @@
+/* Update success message */
+.update-success-message {
+    text-align: center;
+    padding: 1rem;
+    background-color: #262626;
+    color: #fff;
+    border-radius: 30px;
+}
+
+/* Form toggle button container */
+.form-toggle-button-container {
+    text-align: center;
+}
+
+/* Form toggle button */
+.form-toggle-button {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    width: 50%;
+    margin-right: 1rem;
+    transition: all 0.2s;
+    border-radius: 30px !important;
+}
+
+/* Form delete button */
+.form-delete-button {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    width: 50%;
+    margin-top: 1rem;
+    transition: all 0.2s;
+    border-radius: 30px !important;
+}
+
+/* Form container */
+.form-container {
+    align-items: center;
+    padding: 2rem;
+    background-color: #262626;
+    border-radius: 30px;
+    width: 350px;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* Form label */
+.form-label {
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Form control */
+.form-control {
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-color: #363636;
+    border: none;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+/* Form control hover */
+.form-control:hover {
+    background-color: #ffffff;
+    border: 3px solid steelblue;
+    color: rgb(0, 0, 0);
+}
+
+/* Form control focus */
+.form-control:focus {
+    box-shadow: 0px 0px 8px 1px #ffffff;
+    border: 3px solid steelblue;
+}
+
+/* Form submit button */
+.form-submit-button {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    width: 100%;
+    margin-top: 1rem;
+    transition: all 0.2s;
+    border-radius: 30px !important;
+}
+
+/* Form submit button hover */
+.form-submit-button:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0px 0px 8px 1px #ffffff;
+}
+
+/* User info container */
+.user-info-container {
+    text-align: center;
+    color: #fff;
+}
+
+/* User info label */
+.user-info-label {
+    font-weight: bold;
+}
+
+/* User info value */
+.user-info-value {
+    font-style: italic;
+}
+
+/* Favorite movies container */
+.favorite-movies-container {
+    margin-top: 2rem;
+}
+
+/* Favorite movies header */
+.favorite-movies-header {
+    text-align: center;
+    color: #fff;
+}
+
