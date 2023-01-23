@@ -4,8 +4,11 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { Row, Col, Button, Card } from "react-bootstrap";
+import { Row, Col} from "react-bootstrap";
+import { MOVIE_API_URL } from "../../config";
+
 import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -36,7 +39,7 @@ export const MainView = () => {
     }
 
     axios
-      .get("https://sheltered-crag-54265.herokuapp.com/movies", {
+      .get(`${MOVIE_API_URL}/movies`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -74,17 +77,24 @@ export const MainView = () => {
           localStorage.clear();
         }}
       />
-      <Row className="justify-content-md- ">
+      <Row>
+        <div className="search-filter-container">
+
         <input
+          className="search-input"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search by Title, Genre, Director"
         />
         <input
+          className="filter-input"
           value={filterQuery}
           onChange={(e) => setFilterQuery(e.target.value)}
           placeholder="Filter by Genre"
         />
+        </div>
+        <div className="space-class"></div>
+
         <Routes>
           <Route
             path="/signup"
@@ -107,11 +117,13 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={5}>
+                  <Col>
                     <LoginView
                       onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
+                        localStorage.setItem("token", token);
+                        localStorage.setItem("user", JSON.stringify(user));
                       }}
                     />
                   </Col>
@@ -141,6 +153,21 @@ export const MainView = () => {
           />
 
           <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <Col md={5}>
+                    <ProfileView user={user} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+
+          <Route
             path="/"
             element={
               <>
@@ -151,8 +178,8 @@ export const MainView = () => {
                 ) : (
                   <>
                     {filteredMovies.map((movie) => (
-                      <Col className="mb-4" key={movie.id} md={3}>
-                        <MovieCard movie={movie} onMovieClick={null}/>
+                      <Col key={movie.id} md={3} className="Movie-Card">
+                        <MovieCard movie={movie} onMovieClick={null} />
                       </Col>
                     ))}
                   </>
