@@ -12441,10 +12441,6 @@ textarea.form-control-lg {
   box-shadow: 0 0 8px 1px #fff;
 }
 
-.search-filter-container {
-  visibility: hidden;
-}
-
 .movie-view {
   margin: 0 auto;
   background-color: #0000 !important;
