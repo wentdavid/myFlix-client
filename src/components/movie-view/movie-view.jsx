@@ -68,24 +68,47 @@ export const MovieView = ({ movie, onBackClick }) => {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={movie.ImagePath} />
-      <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
-        <Card.Text>Genre: {movie.Genre.Name}</Card.Text>
-        <Card.Text>Genre Description: {movie.Genre.Description}</Card.Text>
-        <Card.Text>Director: {movie.Director.Name}</Card.Text>
-        <Card.Text>Bio: {movie.Director.Bio}</Card.Text>
-        <Card.Text>Birth: {movie.Director.Birth}</Card.Text>
-        <Card.Text>Death: {movie.Director.Death}</Card.Text>
-        <Card.Text>Featured: {movie.Featured}</Card.Text>
+    <Card className="movie-view">
+      <Card.Img
+        className="movie-view-img"
+        variant="top"
+        src={movie.ImagePath}
+      />
+      <Card.Body className="movie-view-body">
+        <Card.Title className="movie-view-title">{movie.Title}</Card.Title>
+        <Card.Text className="movie-view-text">{movie.Description}</Card.Text>
+        <Card.Text className="movie-view-text">
+          Genre: {movie.Genre.Name}
+        </Card.Text>
+        <Card.Text className="movie-view-text">
+          Genre Description: {movie.Genre.Description}
+        </Card.Text>
+        <Card.Text className="movie-view-text">
+          Director: {movie.Director.Name}
+        </Card.Text>
+        <Card.Text className="movie-view-text">
+          Bio: {movie.Director.Bio}
+        </Card.Text>
+        <Card.Text className="movie-view-text">
+          Birth: {movie.Director.Birth}
+        </Card.Text>
+        <Card.Text className="movie-view-text">
+          Death: {movie.Director.Death}
+        </Card.Text>
+        <Card.Text className="movie-view-text">
+          Featured: {movie.Featured}
+        </Card.Text>
         <Link to="/">
-          <Button variant="primary" onClick={onBackClick}>
+          <Button
+            className="movie-view-button"
+            variant="primary"
+            onClick={onBackClick}
+          >
             Back
           </Button>
         </Link>
         <Button
+          className="movie-view-favorite-button"
           variant={isFavorited ? "danger" : "primary"}
           onClick={handleFavorites}
         >

@@ -12246,12 +12246,26 @@ textarea.form-control-lg {
   }
 
   100% {
-    transform: rotate(5deg)translate(10px);
+    transform: rotate(6deg)translate(2px);
   }
 }
 
 .movie-logo-top:hover {
   animation: 2s ease-in-out infinite alternate logo-animation;
+}
+
+@keyframes logo-animation {
+  0% {
+    transform: rotate(0)translate(0);
+  }
+
+  50% {
+    transform: rotate(0)translate(0, -20px);
+  }
+
+  100% {
+    transform: rotate(5deg)translate(10px);
+  }
 }
 
 .movie-logo-bottom {
@@ -12267,11 +12281,11 @@ textarea.form-control-lg {
   font-size: 1.5em;
 }
 
-.login-group {
+.signup-group {
   margin-bottom: 20px;
 }
 
-.login-form {
+.signup-form {
   width: 350px;
   background-color: #262626;
   border-radius: 30px;
@@ -12279,7 +12293,7 @@ textarea.form-control-lg {
   padding: 20px;
 }
 
-.login-form .form-control {
+.signup-form .form-control {
   color: #fff;
   background-color: #363636;
   border: none;
@@ -12287,22 +12301,22 @@ textarea.form-control-lg {
   transition: all .2s;
 }
 
-.login-form .form-control:hover {
+.signup-form .form-control:hover {
   color: #000;
   background-color: #fff;
   border: 3px solid #4682b4;
 }
 
-.login-form .form-control:focus {
+.signup-form .form-control:focus {
   border: 3px solid #4682b4;
   box-shadow: 0 0 8px 1px #fff;
 }
 
-.login-form .form-label {
+.signup-form .form-label {
   color: #fff;
 }
 
-.login-button {
+.signup-button {
   width: 100%;
   background-color: #fff;
   border-color: #fff;
@@ -12310,7 +12324,7 @@ textarea.form-control-lg {
   border-radius: 30px !important;
 }
 
-.login-button:hover {
+.signup-button:hover {
   background-color: #fff;
   border-color: #fff;
   box-shadow: 0 0 8px 1px #fff;
@@ -12320,7 +12334,7 @@ textarea.form-control-lg {
   visibility: hidden;
 }
 
-.parent-container {
+.parent-signup-container {
   flex-direction: column;
   align-items: center;
   display: flex;
@@ -12351,6 +12365,20 @@ textarea.form-control-lg {
   animation: 2s ease-in-out infinite alternate logo-animation;
 }
 
+@keyframes logo-animation {
+  0% {
+    transform: rotate(0)translate(0);
+  }
+
+  50% {
+    transform: rotate(0)translate(0, -20px);
+  }
+
+  100% {
+    transform: rotate(6deg)translate(2px);
+  }
+}
+
 .movie-logo-bottom {
   width: 200px;
   margin: 0 auto;
@@ -12417,7 +12445,102 @@ textarea.form-control-lg {
   visibility: hidden;
 }
 
+.movie-view {
+  margin: 0 auto;
+  background-color: #0000 !important;
+}
 
+.movie-view-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff !important;
+  font-size: 1.2em !important;
+}
+
+.movie-view-text {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1em;
+  color: #fff !important;
+}
+
+.movie-view-button {
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 10px;
+  transition: all .2s;
+  border-radius: 30px !important;
+  font-size: .9em !important;
+}
+
+.movie-view-img {
+  width: 80%;
+  height: auto;
+  border-radius: 30px;
+  transition: all .2s;
+  max-width: 500px !important;
+  border-top-left-radius: 30px !important;
+  border-top-right-radius: 30px !important;
+}
+
+.movie-view-favorite-button {
+  width: 100%;
+  background-color: #fff;
+  border-color: #fff;
+  transition: all .2s;
+  border-radius: 30px !important;
+  font-size: .9em !important;
+}
+
+.movie-view-favorite-button:hover {
+  background-color: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 8px 1px #fff;
+}
+
+.movie-view-fav-danger {
+  width: 100%;
+  background-color: red;
+  border-color: red;
+  transition: all .2s;
+  border-radius: 30px !important;
+}
+
+.movie-view-fav-danger:hover {
+  background-color: red;
+  border-color: red;
+  box-shadow: 0 0 8px 1px #fff;
+}
+
+.movie-view-fav-secondary {
+  width: 100%;
+  background-color: #fff;
+  border-color: #fff;
+  transition: all .2s;
+  border-radius: 30px !important;
+}
+
+@media (min-width: 768px) {
+  .movie-view-body {
+    width: 70%;
+    float: right;
+  }
+
+  .movie-view-img {
+    width: 30%;
+    float: left;
+    max-width: 300px !important;
+  }
+
+  .movie-view-text {
+    text-align: left;
+  }
+
+  .movie-view-button, .movie-view-favorite-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
 
 .movie-card {
   width: 200px;
@@ -12521,6 +12644,14 @@ textarea.form-control-lg {
   border-color: #fff;
   transition: all .2s;
   border-radius: 30px !important;
+}
+
+@media (max-width: 768px) {
+  .movie-card-text {
+    visibility: visible;
+    color: #fff;
+    font-size: 1em;
+  }
 }
 
 body {

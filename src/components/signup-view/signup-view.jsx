@@ -43,7 +43,7 @@ export const SignupView = () => {
   }
 
   return (
-    <div className="parent-container">
+    <div className="parent-signup-container">
       <img
         src={require("../../../img/Navbar/MovieApp_Logo_Animation_Top.png")}
         alt="movie logo"
@@ -56,8 +56,10 @@ export const SignupView = () => {
         className="movie-logo-bottom"
       />
 
-      <Form onSubmit={handleSubmit} className="login-form">
-        <Form.Group controlId="formUsername" className="login-group">
+      <p className="welcome-message">Get started at the Movie App</p>
+
+      <Form onSubmit={handleSubmit} className="signup-form">
+        <Form.Group controlId="formUsername" className="signup-group">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
@@ -68,7 +70,7 @@ export const SignupView = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formPassword" className="login-group">
+        <Form.Group controlId="formPassword" className="signup-group">
           <Form.Label>Password:</Form.Label>
           <Form.Control
             type="password"
@@ -78,7 +80,7 @@ export const SignupView = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formEmail" className="login-group">
+        <Form.Group controlId="formEmail" className="signup-group">
           <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
@@ -88,7 +90,7 @@ export const SignupView = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBirthday" className="login-group">
+        <Form.Group controlId="formBirthday" className="signup-group">
           <Form.Label>Birthday:</Form.Label>
           <Form.Control
             type="date"
@@ -102,7 +104,7 @@ export const SignupView = () => {
           variant="primary"
           type="submit"
           onClick={handleSubmit}
-          className="login-button"
+          className="signup-button"
         >
           Submit
         </Button>

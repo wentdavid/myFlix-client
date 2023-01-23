@@ -108,3 +108,10 @@
     border-radius: 30px !important;
 }
 
+@media (max-width: 768px) {
+    .movie-card-text {
+        visibility: visible;
+        font-size: 1em;
+        color: #fff;
+    }
+}
