@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Navigate } from "react-router-dom";
+import { MOVIE_API_URL } from "../../config";
+import "./signup-view.scss";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -20,7 +22,7 @@ export const SignupView = () => {
       Birthday: birthday,
     };
 
-    fetch("https://sheltered-crag-54265.herokuapp.com/users", {
+    fetch(`${MOVIE_API_URL}/users`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -41,51 +43,70 @@ export const SignupView = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          minLength="3"
-        />
-      </Form.Group>
+    <div className="parent-container">
+      <img
+        src={require("../../../img/Navbar/MovieApp_Logo_Animation_Top.png")}
+        alt="movie logo"
+        className="movie-logo-top"
+      />
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
+      <img
+        src={require("../../../img/Navbar/MovieApp_Logo_Animation_Bottom.png")}
+        alt="movie logo"
+        className="movie-logo-bottom"
+      />
 
-      <Form.Group controlId="formEmail">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </Form.Group>
+      <Form onSubmit={handleSubmit} className="login-form">
+        <Form.Group controlId="formUsername" className="login-group">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            minLength="3"
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formBirthday">
-        <Form.Label>Birthday:</Form.Label>
-        <Form.Control
-          type="date"
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-          required
-        />
-      </Form.Group>
+        <Form.Group controlId="formPassword" className="login-group">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Form>
+        <Form.Group controlId="formEmail" className="login-group">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBirthday" className="login-group">
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control
+            type="date"
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={handleSubmit}
+          className="login-button"
+        >
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 };
