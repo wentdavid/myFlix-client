@@ -12,13 +12,19 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   }
 
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={movie.ImagePath} />
-      <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
-        <Link to={`/movies/${movie._id}`}>
+    <Card className="movie-card">
+      <Card.Img
+        className="movie-card-img"
+        variant="top"
+        src={movie.ImagePath}
+      />
+      <Card.Body className="movie-card-body">
+        <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
+        <Card.Text className="movie-card-text">{movie.Description}</Card.Text>
+        <div className="center-button">
+        <Link className="movie-card-link" to={`/movies/${movie._id}`}>
           <Button
+            className="movie-card-button"
             variant="primary"
             onClick={() => {
               //onMovieClick(movie);
@@ -28,11 +34,13 @@ export const MovieCard = ({ movie, onMovieClick }) => {
           </Button>
         </Link>
         <Button
+          className="movie-card-favorite-button"
           variant={isFavorited ? "danger" : "secondary"}
           onClick={handleFavoriteClick}
         >
-          {isFavorited ? "Unfavorite" : "Favorite"}
+          {isFavorited ? "Favovrited" : "+ Add to Favorites"}
         </Button>
+        </div>
       </Card.Body>
     </Card>
   );
