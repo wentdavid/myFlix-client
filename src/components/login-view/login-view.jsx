@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { MOVIE_API_URL } from "../../config";
 import "./login-view.scss";
 
 
@@ -14,7 +15,7 @@ const handleSubmit = (event) => {
   event.preventDefault();
 
   axios
-    .post("https://sheltered-crag-54265.herokuapp.com/login", {
+    .post(`${MOVIE_API_URL}/login`, {
       Username: username,
       Password: password,
     })
@@ -66,7 +67,7 @@ const handleSubmit = (event) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            minLength="8"
+            minLength="5"
             required
           />
         </Form.Group>
