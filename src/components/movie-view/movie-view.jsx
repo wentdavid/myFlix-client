@@ -3,15 +3,17 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
+import { MOVIE_API_URL } from "../../config";
 
 import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
   const [isFavorited, setIsFavorited] = useState(false);
+ // const movie = movies.find((movie) => movie._id === movieId);//
 
   // Fetch data for the logged in user
   useEffect(() => {
-    fetch("https://sheltered-crag-54265.herokuapp.com/users")
+    fetch(`${MOVIE_API_URL}/users`)
       .then((response) => response.json())
       .then((data) => {
         // Find the logged in user by filtering the list by username
@@ -24,7 +26,7 @@ export const MovieView = ({ movie, onBackClick }) => {
     event.preventDefault();
     if (isFavorited) {
       // If movie is already in favorites, remove it
-      fetch("https://sheltered-crag-54265.herokuapp.com/users", {
+      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
         method: "PUT",
         body: JSON.stringify({
           Username: username,
@@ -45,7 +47,7 @@ export const MovieView = ({ movie, onBackClick }) => {
       });
     } else {
       // If movie is not in favorites, add it
-      fetch("https://sheltered-crag-54265.herokuapp.com/users", {
+      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
         method: "PUT",
         body: JSON.stringify({
           Username: username,
