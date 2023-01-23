@@ -12330,10 +12330,6 @@ textarea.form-control-lg {
   box-shadow: 0 0 8px 1px #fff;
 }
 
-.search-filter-container {
-  visibility: hidden;
-}
-
 .parent-signup-container {
   flex-direction: column;
   align-items: center;
@@ -12439,10 +12435,6 @@ textarea.form-control-lg {
   background-color: #fff;
   border-color: #fff;
   box-shadow: 0 0 8px 1px #fff;
-}
-
-.search-filter-container {
-  visibility: hidden;
 }
 
 .movie-view {
