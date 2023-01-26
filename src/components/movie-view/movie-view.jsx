@@ -73,6 +73,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         className="movie-view-img"
         variant="top"
         src={movie.ImagePath}
+        crossOrigin="anonymous"
       />
       <Card.Body className="movie-view-body">
         <Card.Title className="movie-view-title">{movie.Title}</Card.Title>
