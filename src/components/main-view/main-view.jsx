@@ -20,6 +20,8 @@ export const MainView = () => {
   const [token, setToken] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
+  const [clickedMovie, setClickedMovie] = useState(null);
+
 
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -79,19 +81,18 @@ export const MainView = () => {
       />
       <Row>
         <div className="search-filter-container">
-
-        <input
-          className="search-input"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search by Title, Genre, Director"
-        />
-        <input
-          className="filter-input"
-          value={filterQuery}
-          onChange={(e) => setFilterQuery(e.target.value)}
-          placeholder="Filter by Genre"
-        />
+          <input
+            className="search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by Title, Genre, Director"
+          />
+          <input
+            className="filter-input"
+            value={filterQuery}
+            onChange={(e) => setFilterQuery(e.target.value)}
+            placeholder="Filter by Genre"
+          />
         </div>
         <div className="space-class"></div>
 
@@ -143,7 +144,9 @@ export const MainView = () => {
                   <>
                     {filteredMovies.map((movie) => (
                       <Col key={movie._id} md={8}>
-                        <MovieView movie={movie} />
+                        {clickedMovie ? (
+                          <MovieView movie={clickedMovie} />
+                        ) : null}
                       </Col>
                     ))}
                   </>
@@ -179,7 +182,10 @@ export const MainView = () => {
                   <>
                     {filteredMovies.map((movie) => (
                       <Col key={movie.id} md={3} className="Movie-Card">
-                        <MovieCard movie={movie} onMovieClick={null} />
+                        <MovieCard
+                          movie={movie}
+                          onMovieClick={() => setClickedMovie(movie)}
+                        />
                       </Col>
                     ))}
                   </>
