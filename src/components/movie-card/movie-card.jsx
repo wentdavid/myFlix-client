@@ -3,13 +3,53 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 import { Card, Button } from "react-bootstrap";
+import { MOVIE_API_URL } from "../../config";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const handleFavoriteClick = () => {
-    setIsFavorited(!isFavorited);
-  }
+  const handleFavorites = (event) => {
+    event.preventDefault();
+    if (isFavorited) {
+      // If movie is already in favorites, remove it
+      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          Username: username,
+          FavoriteMovies: user.FavoriteMovies.filter((m) => m._id !== movie._id),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.ok) {
+          setIsFavorited(false);
+          alert("Movie removed from favorites");
+        } else {
+          alert("Failed to remove movie from favorites");
+        }
+      });
+    } else {
+      // If movie is not in favorites, add it
+      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          Username: username,
+          FavoriteMovies: [...user.FavoriteMovies, movie._id],
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.ok) {
+          setIsFavorited(true);
+          alert("Movie added to favorites");
+        } else {
+          alert("Failed to add movie to favorites");
+        }
+      });
+    }
+  };
 
   return (
     <Card className="movie-card">
@@ -22,24 +62,24 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
         <Card.Text className="movie-card-text">{movie.Description}</Card.Text>
         <div className="center-button">
-        <Link className="movie-card-link" to={`/movies/${movie._id}`}>
+          <Link className="movie-card-link" to={`/movies/${movie._id}`}>
+            <Button
+              className="movie-card-button"
+              variant="primary"
+              onClick={() => {
+                //onMovieClick(movie);
+              }}
+            >
+              View Details
+            </Button>
+          </Link>
           <Button
-            className="movie-card-button"
-            variant="primary"
-            onClick={() => {
-              //onMovieClick(movie);
-            }}
+            className="movie-card-favorite-button"
+            variant={isFavorited ? "danger" : "secondary"}
+            onClick={handleFavorites}
           >
-            View Details
+            {isFavorited ? "Favorited" : "+ Add to Favorites"}
           </Button>
-        </Link>
-        <Button
-          className="movie-card-favorite-button"
-          variant={isFavorited ? "danger" : "secondary"}
-          onClick={handleFavoriteClick}
-        >
-          {isFavorited ? "Favovrited" : "+ Add to Favorites"}
-        </Button>
         </div>
       </Card.Body>
     </Card>
