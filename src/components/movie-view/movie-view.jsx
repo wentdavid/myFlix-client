@@ -72,32 +72,36 @@ export const MovieView = ({ movie, onBackClick }) => {
       <Card.Img
         className="movie-view-img"
         variant="top"
-        src={movie.ImagePath}
+        src={clickedMovie.ImagePath}
         crossOrigin="anonymous"
       />
       <Card.Body className="movie-view-body">
-        <Card.Title className="movie-view-title">{movie.Title}</Card.Title>
-        <Card.Text className="movie-view-text">{movie.Description}</Card.Text>
+        <Card.Title className="movie-view-title">
+          {clickedMovie.Title}
+        </Card.Title>
         <Card.Text className="movie-view-text">
-          Genre: {movie.Genre.Name}
+          {clickedMovie.Description}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Genre Description: {movie.Genre.Description}
+          Genre: {clickedMovie.Genre.Name}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Director: {movie.Director.Name}
+          Genre Description: {clickedMovie.Genre.Description}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Bio: {movie.Director.Bio}
+          Director: {clickedMovie.Director.Name}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Birth: {movie.Director.Birth}
+          Bio: {clickedMovie.Director.Bio}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Death: {movie.Director.Death}
+          Birth: {clickedMovie.Director.Birth}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Featured: {movie.Featured}
+          Death: {clickedMovie.Director.Death}
+        </Card.Text>
+        <Card.Text className="movie-view-text">
+          Featured: {clickedMovie.Featured}
         </Card.Text>
         <Link to="/">
           <Button
@@ -121,7 +125,7 @@ export const MovieView = ({ movie, onBackClick }) => {
 };
 
 MovieView.propTypes = {
-  movie: PropTypes.shape({
+  clickedMovie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
