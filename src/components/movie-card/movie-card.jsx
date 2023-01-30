@@ -23,7 +23,7 @@ export const MovieCard = ({ user, movie, onMovieClick }) => {
         }),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       }).then((response) => {
         if (response.ok) {
@@ -43,7 +43,7 @@ export const MovieCard = ({ user, movie, onMovieClick }) => {
         }),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       }).then((response) => {
         if (response.ok) {
