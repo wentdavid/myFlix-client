@@ -142,13 +142,11 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {filteredMovies.map((movie) => (
-                      <Col key={movie._id} md={8}>
+                      <Col md={8}>
                         {clickedMovie ? (
-                          <MovieView movie={clickedMovie} />
+                          <MovieView user={user} movie={clickedMovie} />
                         ) : null}
                       </Col>
-                    ))}
                   </>
                 )}
               </>
@@ -183,6 +181,7 @@ export const MainView = () => {
                     {filteredMovies.map((movie) => (
                       <Col key={movie.id} md={3} className="Movie-Card">
                         <MovieCard
+                          user={user}
                           movie={movie}
                           onMovieClick={() => setClickedMovie(movie)}
                         />

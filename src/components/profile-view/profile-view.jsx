@@ -64,6 +64,7 @@ export const ProfileView = () => {
     })
       .then((response) => response.json()) // Convert the response to JSON
       .then((data) => {
+        console.log("UserFAvMOvies", data)
         // Map the movie data from the API to a new format
         const moviesFromApi = data.map((movie) => {
           return {
@@ -76,8 +77,8 @@ export const ProfileView = () => {
           };
         });
         // Filter the movies to get only the movies that are favorited by the current user
-        const userFavoriteMovies = moviesFromApi.filter((movie) =>
-          favoriteMovies.includes(movie.id)
+        const userFavoriteMovies = data.filter((movie) =>
+          favoriteMovies.includes(movie._id)
         );
         // Sort movies alphabetically
         userFavoriteMovies.sort((a, b) => (a.title > b.title ? 1 : -1));

@@ -1,25 +1,29 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 import { Card, Button } from "react-bootstrap";
 import { MOVIE_API_URL } from "../../config";
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ user, movie, onMovieClick }) => {
+  console.log("Movie", movie)
   const [isFavorited, setIsFavorited] = useState(false);
 
   const handleFavorites = (event) => {
     event.preventDefault();
     if (isFavorited) {
       // If movie is already in favorites, remove it
-      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
-        method: "PUT",
+      fetch(`${MOVIE_API_URL}/users/${user.Username}/movies/${movie._id}`, {
+        method: "DELETE",
         body: JSON.stringify({
-          Username: username,
-          FavoriteMovies: user.FavoriteMovies.filter((m) => m._id !== movie._id),
+          Username: user.Username,
+          FavoriteMovies: user.FavoriteMovies.filter(
+            (m) => m._id !== movie._id
+          ),
         }),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       }).then((response) => {
         if (response.ok) {
@@ -31,14 +35,15 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       });
     } else {
       // If movie is not in favorites, add it
-      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
-        method: "PUT",
+      fetch(`${MOVIE_API_URL}/users/${user.Username}/movies/${movie._id}`, {
+        method: "POST",
         body: JSON.stringify({
-          Username: username,
+          Username: user.Username,
           FavoriteMovies: [...user.FavoriteMovies, movie._id],
         }),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`  
         },
       }).then((response) => {
         if (response.ok) {
@@ -67,7 +72,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
               className="movie-card-button"
               variant="primary"
               onClick={() => {
-                //onMovieClick(movie);
+                onMovieClick(movie);
               }}
             >
               View Details
@@ -93,5 +98,5 @@ MovieCard.propTypes = {
     ImagePath: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onMovieClick: PropTypes.func.isRequired,
 };

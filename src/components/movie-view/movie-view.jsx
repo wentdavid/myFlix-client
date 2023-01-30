@@ -7,7 +7,7 @@ import { MOVIE_API_URL } from "../../config";
 
 import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ user, movie, onBackClick }) => {
   const [isFavorited, setIsFavorited] = useState(false);
  // const movie = movies.find((movie) => movie._id === movieId);//
 
@@ -26,16 +26,17 @@ export const MovieView = ({ movie, onBackClick }) => {
     event.preventDefault();
     if (isFavorited) {
       // If movie is already in favorites, remove it
-      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
-        method: "PUT",
+      fetch(`${MOVIE_API_URL}/users/${user.Username}/movies/${movie._id}`, {
+        method: "DELETE",
         body: JSON.stringify({
-          Username: username,
+          Username: user.Username,
           FavoriteMovies: user.FavoriteMovies.filter(
             (m) => m._id !== movie._id
           ),
         }),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       }).then((response) => {
         if (response.ok) {
@@ -47,14 +48,15 @@ export const MovieView = ({ movie, onBackClick }) => {
       });
     } else {
       // If movie is not in favorites, add it
-      fetch(`${MOVIE_API_URL}/users/${username}/movies/${movie}`, {
-        method: "PUT",
+      fetch(`${MOVIE_API_URL}/users/${user.Username}/movies/${movie._id}`, {
+        method: "POST",
         body: JSON.stringify({
-          Username: username,
+          Username: user.Username,
           FavoriteMovies: [...user.FavoriteMovies, movie._id],
         }),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`  
         },
       }).then((response) => {
         if (response.ok) {
@@ -72,36 +74,32 @@ export const MovieView = ({ movie, onBackClick }) => {
       <Card.Img
         className="movie-view-img"
         variant="top"
-        src={clickedMovie.ImagePath}
+        src={movie.ImagePath}
         crossOrigin="anonymous"
       />
       <Card.Body className="movie-view-body">
-        <Card.Title className="movie-view-title">
-          {clickedMovie.Title}
-        </Card.Title>
+        <Card.Title className="movie-view-title">{movie.Title}</Card.Title>
+        <Card.Text className="movie-view-text">{movie.Description}</Card.Text>
         <Card.Text className="movie-view-text">
-          {clickedMovie.Description}
+          Genre: {movie.Genre.Name}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Genre: {clickedMovie.Genre.Name}
+          Genre Description: {movie.Genre.Description}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Genre Description: {clickedMovie.Genre.Description}
+          Director: {movie.Director.Name}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Director: {clickedMovie.Director.Name}
+          Bio: {movie.Director.Bio}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Bio: {clickedMovie.Director.Bio}
+          Birth: {movie.Director.Birth}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Birth: {clickedMovie.Director.Birth}
+          Death: {movie.Director.Death}
         </Card.Text>
         <Card.Text className="movie-view-text">
-          Death: {clickedMovie.Director.Death}
-        </Card.Text>
-        <Card.Text className="movie-view-text">
-          Featured: {clickedMovie.Featured}
+          Featured: {movie.Featured}
         </Card.Text>
         <Link to="/">
           <Button
@@ -125,7 +123,7 @@ export const MovieView = ({ movie, onBackClick }) => {
 };
 
 MovieView.propTypes = {
-  clickedMovie: PropTypes.shape({
+  movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
