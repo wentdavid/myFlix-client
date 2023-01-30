@@ -75,7 +75,6 @@ export const MovieView = ({ user, movie, onBackClick }) => {
         className="movie-view-img"
         variant="top"
         src={movie.ImagePath}
-        crossOrigin="anonymous"
       />
       <Card.Body className="movie-view-body">
         <Card.Title className="movie-view-title">{movie.Title}</Card.Title>
@@ -115,7 +114,7 @@ export const MovieView = ({ user, movie, onBackClick }) => {
           variant={isFavorited ? "danger" : "primary"}
           onClick={handleFavorites}
         >
-          {isFavorited ? "Remove from favorites" : "Add to favorites"}
+          {isFavorited ? "Favorited" : "+ Add to Favorites"}
         </Button>
       </Card.Body>
     </Card>

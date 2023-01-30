@@ -17,29 +17,7 @@
     margin-bottom: 20px;
     font-size: 0em;
     color: rgb(0, 0, 0);
-    visibility: hidden;
 }
-
-.movie-card:hover .movie-card-text {
-    visibility: visible;
-    font-size: 1em;
-    color: #fff;
-
-}
-
-.movie-card:hover .movie-card-title {
-    font-size: 1.5em!important;
-    color: #fff;
-
-}
-
-.movie-card:hover {
-    transition: all 0.5s;
-    width: 350px;
-    z-index: 1;
-    align-items: center;
-}
-  
 
 .movie-card-button {
     background-color: #ffffff;
@@ -106,12 +84,4 @@
     width: 100%;
     transition: all 0.2s;
     border-radius: 30px !important;
-}
-
-@media (max-width: 768px) {
-    .movie-card-text {
-        visibility: visible;
-        font-size: 1em;
-        color: #fff;
-    }
 }

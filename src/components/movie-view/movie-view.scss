@@ -1,18 +1,17 @@
 .movie-view {
-    margin: 0 auto;
     background-color: rgb(0, 0, 0, 0) !important;
 }
 
 
 .movie-view-title {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
     font-size: 1.2em !important;
     color: #fff !important;
 }
 
 .movie-view-text {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
     font-size: 1em;
     color: #fff !important;
@@ -21,7 +20,6 @@
 
 
 .movie-view-button {
-    background-color: #ffffff;
     width: 100%;
     transition: all 0.2s;
     border-radius: 30px !important;
@@ -32,9 +30,7 @@
 
 
 .movie-view-img {
-    width: 80%;
     max-width: 500px!important;
-    height: auto;
     border-radius: 30px;
     border-top-left-radius: 30px !important;
     border-top-right-radius: 30px !important;
@@ -44,8 +40,6 @@
 
 
 .movie-view-favorite-button {
-    background-color: #ffffff;
-    border-color: #ffffff;
     width: 100%;
     transition: all 0.2s;
     border-radius: 30px !important;
@@ -54,8 +48,6 @@
 }
 
 .movie-view-favorite-button:hover {
-    background-color: #ffffff;
-    border-color: #ffffff;
     box-shadow: 0px 0px 8px 1px #ffffff;
 }
 
@@ -80,26 +72,3 @@
     transition: all 0.2s;
     border-radius: 30px !important;
 }
-
- @media (min-width: 768px) {
-     .movie-view-body {
-         width: 70%;
-         float: right;
-     }
-
-     .movie-view-img {
-         width: 30%;
-         max-width: 300px !important;
-         float: left;
-     }
-
-     .movie-view-text {
-         text-align: left;
-     }
-
-     .movie-view-button,
-     .movie-view-favorite-button {
-         width: 100%;
-         margin-top: 10px;
-     }
- }

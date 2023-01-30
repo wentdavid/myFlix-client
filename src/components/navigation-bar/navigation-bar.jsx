@@ -14,7 +14,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
 
 
   return (
-    <Navbar bg="#262626" className="navbar fixed-top" expand="sm">
+    <Navbar className="navbar fixed-top" expand="sm">
       <Container>
         <Navbar.Brand as={Link} to="/" className="navbar-brand">
           <img

@@ -142,7 +142,7 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                      <Col md={8}>
+                      <Col>
                         {clickedMovie ? (
                           <MovieView user={user} movie={clickedMovie} />
                         ) : null}
@@ -160,7 +160,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : (
-                  <Col md={5}>
+                  <Col>
                     <ProfileView user={user} />
                   </Col>
                 )}
@@ -179,7 +179,7 @@ export const MainView = () => {
                 ) : (
                   <>
                     {filteredMovies.map((movie) => (
-                      <Col key={movie.id} md={3} className="Movie-Card">
+                      <Col key={movie.id} className="Movie-Card">
                         <MovieCard
                           user={user}
                           movie={movie}

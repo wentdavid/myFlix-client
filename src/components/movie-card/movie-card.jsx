@@ -6,7 +6,7 @@ import { Card, Button } from "react-bootstrap";
 import { MOVIE_API_URL } from "../../config";
 
 export const MovieCard = ({ user, movie, onMovieClick }) => {
-  console.log("Movie", movie)
+  console.log("Movie", movie);
   const [isFavorited, setIsFavorited] = useState(false);
 
   const handleFavorites = (event) => {
@@ -23,7 +23,7 @@ export const MovieCard = ({ user, movie, onMovieClick }) => {
         }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((response) => {
         if (response.ok) {
@@ -43,7 +43,7 @@ export const MovieCard = ({ user, movie, onMovieClick }) => {
         }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`  
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((response) => {
         if (response.ok) {

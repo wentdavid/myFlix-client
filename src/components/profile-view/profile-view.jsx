@@ -43,7 +43,7 @@ export const ProfileView = () => {
     fetch(`${MOVIE_API_URL}/users/${username}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     })
       .then((res) => res.json())
@@ -137,7 +137,7 @@ export const ProfileView = () => {
               method: "DELETE",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
               },
             }
           )
@@ -185,7 +185,7 @@ export const ProfileView = () => {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Authorization": `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(data),
           })
@@ -231,7 +231,7 @@ export const ProfileView = () => {
         method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -413,7 +413,7 @@ export const ProfileView = () => {
                       movie={movie}
                       isFavorite={true}
                       toggleFavorite={(isFavorite) =>
-                        toggleFavorite(movie.id, isFavorite)
+                        toggleFavorite(movie._id, isFavorite)
                       }
                     />
                   </Col>
@@ -426,3 +426,4 @@ export const ProfileView = () => {
     </div>
   );
 };
+
