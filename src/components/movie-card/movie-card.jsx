@@ -58,11 +58,18 @@ export const MovieCard = ({ user, movie, onMovieClick }) => {
 
   return (
     <Card className="movie-card">
-      <Card.Img
-        className="movie-card-img"
-        variant="top"
-        src={movie.ImagePath}
-      />
+     
+      <Link className="movie-card-link" to={`/movies/${movie._id}`}>
+        <Card.Img
+          className="movie-card-img"
+          variant="top"
+          src={movie.ImagePath}
+          onClick={() => {
+            onMovieClick(movie);
+          }}
+        />
+      </Link>
+
       <Card.Body className="movie-card-body">
         <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
         <Card.Text className="movie-card-text">{movie.Description}</Card.Text>
