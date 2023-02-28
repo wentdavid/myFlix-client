@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react"; 
+import { useState, useEffect, useMemo } from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
@@ -6,7 +6,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { Row, Col} from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { MOVIE_API_URL } from "../../config";
 
 import axios from "axios";
@@ -21,7 +21,6 @@ export const MainView = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
   const [clickedMovie, setClickedMovie] = useState(null);
-
 
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -46,6 +45,24 @@ export const MainView = () => {
       })
       .then((response) => {
         setMovies(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    axios
+      .get(`${MOVIE_API_URL}/users/${user.Username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setUser(response.data);
+        setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch((error) => {
         console.log(error);
@@ -142,11 +159,11 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                      <Col>
-                        {clickedMovie ? (
-                          <MovieView user={user} movie={clickedMovie} />
-                        ) : null}
-                      </Col>
+                    <Col>
+                      {clickedMovie ? (
+                        <MovieView user={user} movie={clickedMovie} />
+                      ) : null}
+                    </Col>
                   </>
                 )}
               </>
@@ -161,7 +178,7 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col>
-                    <ProfileView user={user} />
+                    <ProfileView user={user} movies={movies} />
                   </Col>
                 )}
               </>

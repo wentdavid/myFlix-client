@@ -7,7 +7,7 @@ import { MOVIE_API_URL } from "../../config";
 
 export const MovieCard = ({ user, movie, onMovieClick }) => {
   console.log("Movie", movie);
-  const [isFavorited, setIsFavorited] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(user.FavoriteMovies.includes(movie._id));
 
   const handleFavorites = (event) => {
     event.preventDefault();
@@ -23,16 +23,19 @@ export const MovieCard = ({ user, movie, onMovieClick }) => {
         }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      }).then((response) => {
-        if (response.ok) {
-          setIsFavorited(false);
-          alert("Movie removed from favorites");
-        } else {
-          alert("Failed to remove movie from favorites");
-        }
-      });
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          if (response) {
+            setIsFavorited(false);
+            localStorage.setItem("user", JSON.stringify(response));
+            alert("Movie removed from favorites");
+          } else {
+            alert("Failed to remove movie from favorites");
+          }
+        });
     } else {
       // If movie is not in favorites, add it
       fetch(`${MOVIE_API_URL}/users/${user.Username}/movies/${movie._id}`, {
@@ -43,22 +46,24 @@ export const MovieCard = ({ user, movie, onMovieClick }) => {
         }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      }).then((response) => {
-        if (response.ok) {
-          setIsFavorited(true);
-          alert("Movie added to favorites");
-        } else {
-          alert("Failed to add movie to favorites");
-        }
-      });
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          if (response) {
+            setIsFavorited(true);
+            localStorage.setItem("user", JSON.stringify(response));
+            alert("Movie added to favorites");
+          } else {
+            alert("Failed to add movie to favorites");
+          }
+        });
     }
   };
 
   return (
     <Card className="movie-card">
-     
       <Link className="movie-card-link" to={`/movies/${movie._id}`}>
         <Card.Img
           className="movie-card-img"
