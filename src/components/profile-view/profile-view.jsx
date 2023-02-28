@@ -411,7 +411,9 @@ export const ProfileView = () => {
                   <Col key={movie.id}>
                     <MovieCard
                       movie={movie}
+                      user={user}
                       isFavorite={true}
+                      onMovieClick={()=> {}}
                       toggleFavorite={(isFavorite) =>
                         toggleFavorite(movie._id, isFavorite)
                       }
