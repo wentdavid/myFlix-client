@@ -43,7 +43,7 @@ export const ProfileView = () => {
     fetch(`${MOVIE_API_URL}/users/${username}`, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
       .then((res) => res.json())
@@ -64,7 +64,7 @@ export const ProfileView = () => {
     })
       .then((response) => response.json()) // Convert the response to JSON
       .then((data) => {
-        console.log("UserFAvMOvies", data)
+        console.log("UserFAvMOvies", data);
         // Map the movie data from the API to a new format
         const moviesFromApi = data.map((movie) => {
           return {
@@ -119,6 +119,7 @@ export const ProfileView = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         username: user.Username,
@@ -137,7 +138,7 @@ export const ProfileView = () => {
               method: "DELETE",
               headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
             }
           )
@@ -155,37 +156,27 @@ export const ProfileView = () => {
               alert("An error occurred while deleting your account");
             });
         } else {
-
-          
-
-
-          
           // If the "Delete Account" button has not been clicked, create an object with the form data
           let data;
           if (formPassword === "********") {
-            // If the password has not been updated from the default value, send an empty string as the password in the PUT request
-            data = {
-              Username: username,
-              Password: "",
-              Email: email,
-              Birthday: birthday,
-            };
-          } else {
-            // If the password has been updated, send the new password in the PUT request
-            data = {
-              Username: username,
-              Password: formPassword,
-              Email: email,
-              Birthday: birthday,
-            };
+            alert("Please provide your old/new password");
+            return;
           }
+
+          // If the password has been updated, send the new password in the PUT request
+          data = {
+            Username: username,
+            Password: formPassword,
+            Email: email,
+            Birthday: birthday,
+          };
 
           // Send a PUT request to the server with the updated form data to update the users information
           fetch(`${MOVIE_API_URL}/users/${user.Username}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(data),
           })
@@ -231,7 +222,7 @@ export const ProfileView = () => {
         method,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -259,34 +250,32 @@ export const ProfileView = () => {
       )}
 
       <Row>
-        
-          <Col>
-            {/* Add a button that allows the user to toggle the form */}
-            <div className="form-toggle-button-container">
+        <Col>
+          {/* Add a button that allows the user to toggle the form */}
+          <div className="form-toggle-button-container">
+            <Button
+              className="form-toggle-button"
+              onClick={() => setDisplayForm(!displayForm)}
+            >
+              {displayForm ? "Cancel" : "Edit Profile"}
+            </Button>
+            {/* Showing delete account button only when form is displayed */}
+            {displayForm && (
               <Button
-                className="form-toggle-button"
-                onClick={() => setDisplayForm(!displayForm)}
+                className="form-delete-button"
+                type="submit"
+                variant="danger"
+                onClick={(e) => {
+                  console.log("Delete Account button clicked");
+                  setDeleteClicked(true);
+                  handleSubmit(e);
+                }}
               >
-                {displayForm ? "Cancel" : "Edit Profile"}
+                Delete Account
               </Button>
-              {/* Showing delete account button only when form is displayed */}
-              {displayForm && (
-                <Button
-                  className="form-delete-button"
-                  type="submit"
-                  variant="danger"
-                  onClick={(e) => {
-                    console.log("Delete Account button clicked");
-                    setDeleteClicked(true);
-                    handleSubmit(e);
-                  }}
-                >
-                  Delete Account
-                </Button>
-              )}
-            </div>
-          </Col>
-        
+            )}
+          </div>
+        </Col>
 
         {/* Toggling the form based on the value of 'displayForm' */}
         {displayForm ? (
@@ -334,9 +323,8 @@ export const ProfileView = () => {
                   value={birthday}
                   onChange={(e) => setBirthday(e.target.value)}
                 />
-              
               </Form.Group>
-            
+
               {/* Showing a modal to confirm changes */}
               <Modal
                 show={showModal}
@@ -411,7 +399,9 @@ export const ProfileView = () => {
                   <Col key={movie.id}>
                     <MovieCard
                       movie={movie}
+                      user={user}
                       isFavorite={true}
+                      onMovieClick={() => {}}
                       toggleFavorite={(isFavorite) =>
                         toggleFavorite(movie._id, isFavorite)
                       }
@@ -426,4 +416,3 @@ export const ProfileView = () => {
     </div>
   );
 };
-
