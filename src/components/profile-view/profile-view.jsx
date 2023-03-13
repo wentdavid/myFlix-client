@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Row, Col, Modal } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import ConfirmModal from "../confirm-modal/confirm-modal";
 import "./profile-view.scss";
 import { MOVIE_API_URL } from "../../config";
-import { verifyPassword } from "../../api";
+import api from "../../api";
+import helper from "../../helper";
 
 export const ProfileView = () => {
   // Declare state variables for the form inputs, the token, and the displayForm state
@@ -40,190 +42,78 @@ export const ProfileView = () => {
   };
 
   // Fetch user from server
-  const getUser = (username) => {
-    fetch(`${MOVIE_API_URL}/users/${username}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        // If the request was successful
-        setUser(response);
-
-        getUserFavoriteMovies(response.FavoriteMovies);
-      })
-      .catch((error) => {
-        alert("An error occurred while fetching your profile");
-      });
+  // Renish: Use getUser from api.js
+  const getUser = async (username) => {
+    const res = await api.getUser(username);
+    if (res) {
+      setUser(res);
+      getUserFavoriteMovies(res.FavoriteMovies);
+    }
   };
 
-  const getUserFavoriteMovies = (favoriteMovies) => {
-    fetch(`${MOVIE_API_URL}/movies`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    })
-      .then((response) => response.json()) // Convert the response to JSON
-      .then((data) => {
-        console.log("UserFAvMOvies", data);
-        // Map the movie data from the API to a new format
-        const moviesFromApi = data.map((movie) => {
-          return {
-            id: movie._id,
-            title: movie.Title,
-            image: movie.ImagePath,
-            description: movie.Description,
-            genre: movie.Genre.Name,
-            director: movie.Director.Name,
-          };
-        });
-        // Filter the movies to get only the movies that are favorited by the current user
-        const userFavoriteMovies = data.filter((movie) =>
-          favoriteMovies.includes(movie._id)
-        );
-        // Sort movies alphabetically
-        userFavoriteMovies.sort((a, b) => (a.title > b.title ? 1 : -1));
-        // Update the favoriteMovies state with the user's favorite movies
-        setFavoriteMovies(userFavoriteMovies);
-      })
-      .catch((error) => {
-        // Display an alert if there is an error
-        window.alert("An error occurred: " + error);
-      });
+  const getUserFavoriteMovies = async (favoriteMovies) => {
+    const res = await api.getAllMovies();
+    if (res) {
+      // Filter the movies to get only the movies that are favorited by the current user
+      const userFavoriteMovies = res.filter((movie) =>
+        favoriteMovies.includes(movie._id)
+      );
+      // Sort movies alphabetically
+      userFavoriteMovies.sort((a, b) => (a.title > b.title ? 1 : -1));
+      // Update the favoriteMovies state with the user's favorite movies
+      setFavoriteMovies(userFavoriteMovies);
+    }
   };
 
-  const handleModalConfirm2 = async () => {
-    console.log("handleModalConfirm2 called", deleteClicked);
-    const res = await verifyPassword(modalPassword, modalPassword);
-    if (!res) {
-      alert("Incorrect password");
+  /* Renish: Runs when the user clicks on Confirm */
+  const handleModalConfirm = async () => {
+    console.log("handleModalConfirm called", deleteClicked);
+    const res = await api.verifyPassword(modalPassword);
+    if (res) {
+      deleteClicked ? deleteAccount() : updateAccount();
+    }
+  };
+
+  /* Renish: Show modal, Try Delete Ac, Clean Up */
+  const deleteAccount = async () => {
+    const res = await api.deleteUser(username);
+    console.log(res)
+    if (res) {
+      setShowModal(false);
+      alert("User deleted successfully!");
+      helper.clearAndForceLogout();
+    }
+  }
+
+  /* Renish: Show modal, Try Update Ac, Clean Up */
+  const updateAccount = async () => {
+    const passwordInput = document.getElementById("formPassword");
+    if (formPassword === "********" || formPassword === "") {
+      setShowModal(false);
+      alert("Please provide your old/new password");
+      passwordInput.classList.add("form-control-focus");
       return;
     }
-    setShowModal(false);
-    deleteClicked ? handleDelete() : handleUpdate();
-  };
-
-  // Event handler for when the form is submitted
-  const handleSubmit = (event) => {
-    console.log("handleSubmit called, deleteClicked:", deleteClicked);
-    // Prevent the default refresh
-    event.preventDefault();
-
-    // Check if any of the form values have been changed from their default values or if the "Delete Account" button has been clicked
-    if (
-      username !== user.Username ||
-      formPassword !== "********" ||
-      email !== user.Email ||
-      birthday !== user.Birthday ||
-      deleteClicked
-    ) {
-      // If any of the form values have been changed or the "Delete Account" button has been clicked, show the modal to confirm the changes
-      setShowModal(true);
-    } else {
-      // If none of the form values have been changed, show an alert
-      alert("No changes have been made");
+    const res = await api.updateUser({
+      Username: username,
+      Password: formPassword,
+      Email: email,
+      Birthday: birthday,
+    });
+    if (res) {
+      passwordInput.classList.remove("form-control-focus");
+      alert("User details updated successfully!");
+      setUser(res);
+      localStorage.setItem("user", JSON.stringify(res));
+      setUpdateSuccess(true);
+      setDisplayForm(false);
+      setShowModal(false); // Hide the modal
+      // helper.clearAndForceLogout(); You can also simply logout the user
     }
-  };
+  }
   
-  // Event handler for when the "Confirm" button in the modal is clicked
-  const handleModalConfirm = () => {
-    // Send a request to the server to check if the entered password is correct
-    fetch(`${MOVIE_API_URL}/verify-password`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({
-        username: user.Username,
-        password: modalPassword,
-      }),
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        // If the "Delete Account" button has been clicked, send a DELETE request to delete the user's account
-        if (deleteClicked) {
-          fetch(
-            `${MOVIE_API_URL}/users/${
-              JSON.parse(localStorage.getItem("user")).Username
-            }`,
-            {
-              method: "DELETE",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          )
-            .then((res) => res.json())
-            .then((response) => {
-              // If the DELETE request was successful, log the user out and remove their information from localStorage
-              setShowModal(false);
-              alert("Your account has been deleted");
-              localStorage.removeItem("token");
-              localStorage.removeItem("user");
-              window.location = "/login";
-            })
-            .catch((error) => {
-              console.error(error);
-              alert("An error occurred while deleting your account");
-            });
-        } else {
-          // If the "Delete Account" button has not been clicked, create an object with the form data
-          let data;
-          if (formPassword === "********") {
-            alert("Please provide your old/new password");
-            return;
-          }
 
-          // If the password has been updated, send the new password in the PUT request
-          data = {
-            Username: username,
-            Password: formPassword,
-            Email: email,
-            Birthday: birthday,
-          };
-
-          // Send a PUT request to the server with the updated form data to update the users information
-          fetch(`${MOVIE_API_URL}/users/${user.Username}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify(data),
-          })
-            .then((res) => res.json())
-            .then((response) => {
-              // If the request was successful
-
-              alert("Profile update successful");
-              //update state
-              setUser(response);
-              //update localStorage
-              localStorage.setItem("user", JSON.stringify(response));
-              setUpdateSuccess(true);
-              setDisplayForm(false);
-              setShowModal(false); // Hide the modal
-            })
-            .catch((error) => {
-              console.error(error);
-              alert("An error occurred while updating your profile");
-              setUpdateSuccess(false);
-            });
-        }
-      })
-      .catch((error) => {
-        // There was an error in the request or the response was not 2xx
-        console.error(error);
-        alert(
-          "An error occurred while verifying the password. Please try again."
-        );
-        setShowModal(false);
-        return;
-      });
-  };
-
+  // Renish: TODO: We can also move this to api.js
   const toggleFavorite = (movieId, isFavorite) => {
     // Send a DELETE request to the server if the movie is already marked as favorite, or a POST request if it is not yet marked as favorite
     const method = isFavorite ? "DELETE" : "POST";
@@ -279,9 +169,8 @@ export const ProfileView = () => {
                 type="submit"
                 variant="danger"
                 onClick={(e) => {
-                  console.log("Delete Account button clicked");
                   setDeleteClicked(true);
-                  handleSubmit(e);
+                  setShowModal(true);
                 }}
               >
                 Delete Account
@@ -293,7 +182,11 @@ export const ProfileView = () => {
         {/* Toggling the form based on the value of 'displayForm' */}
         {displayForm ? (
           <Col className="profile">
-            <Form className="form-container" onSubmit={handleSubmit}>
+            <Form className="form-container" onSubmit={(e) => {
+              e.preventDefault();
+              setDeleteClicked(false);
+              setShowModal(true)
+              }}>
               <Form.Group controlId="formUsername" className="form-group">
                 <Form.Label className="form-label">Username:</Form.Label>
                 <Form.Control
@@ -339,41 +232,14 @@ export const ProfileView = () => {
               </Form.Group>
 
               {/* Showing a modal to confirm changes */}
-              <Modal
-                show={showModal}
-                onHide={() => setShowModal(false)}
-                className="form-modal"
-              >
-                <Modal.Header closeButton>
-                  <Modal.Title>Confirm Changes</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <p>Enter your current password to confirm your changes:</p>
-                  <Form.Control
-                    className="form-control"
-                    type="password"
-                    placeholder="Enter your password"
-                    value={modalPassword}
-                    onChange={(e) => setModalPassword(e.target.value)}
-                  />
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setShowModal(false)}
-                    className="form-modal-cancel"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    variant="primary"
-                    onClick={handleModalConfirm2}
-                    className="form-modal-confirm"
-                  >
-                    Confirm
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+              {/* Renish: Converted modal into another component */}
+              <ConfirmModal 
+                show={showModal} 
+                setShowModal={setShowModal} 
+                modalPassword={modalPassword} 
+                setModalPassword={setModalPassword}
+                handleModalConfirm={handleModalConfirm}
+              />
 
               <Button
                 className="form-submit-button"
