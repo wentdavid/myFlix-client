@@ -3,6 +3,7 @@ import { Button, Form, Row, Col, Modal } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 import "./profile-view.scss";
 import { MOVIE_API_URL } from "../../config";
+import { verifyPassword } from "../../api";
 
 export const ProfileView = () => {
   // Declare state variables for the form inputs, the token, and the displayForm state
@@ -91,6 +92,17 @@ export const ProfileView = () => {
       });
   };
 
+  const handleModalConfirm2 = async () => {
+    console.log("handleModalConfirm2 called", deleteClicked);
+    const res = await verifyPassword(modalPassword, modalPassword);
+    if (!res) {
+      alert("Incorrect password");
+      return;
+    }
+    setShowModal(false);
+    deleteClicked ? handleDelete() : handleUpdate();
+  };
+
   // Event handler for when the form is submitted
   const handleSubmit = (event) => {
     console.log("handleSubmit called, deleteClicked:", deleteClicked);
@@ -112,6 +124,7 @@ export const ProfileView = () => {
       alert("No changes have been made");
     }
   };
+  
   // Event handler for when the "Confirm" button in the modal is clicked
   const handleModalConfirm = () => {
     // Send a request to the server to check if the entered password is correct
@@ -354,7 +367,7 @@ export const ProfileView = () => {
                   </Button>
                   <Button
                     variant="primary"
-                    onClick={handleModalConfirm}
+                    onClick={handleModalConfirm2}
                     className="form-modal-confirm"
                   >
                     Confirm
