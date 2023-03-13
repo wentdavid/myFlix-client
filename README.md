@@ -1,7 +1,7 @@
 <h1>Movie App</h1>
 <p>This is a movie app that allows users to view information about movies and add them to their favorites list. The app is built using React and Bootstrap, and the data is provided by a REST API. Feel free to test it <a href="https://gleans-moviedb.netlify.app/">here</a>.</p>
 
-<img src="./src/img/mainview.png" alt="mainview" width="500" height="300">
+<img width="800" alt="mainview" src="https://user-images.githubusercontent.com/112701190/224073189-6af3eaca-cdd0-48f5-a4dd-8c4c287f468c.png">
 
 <h2>Table of Contents</h2>
 <ul>
