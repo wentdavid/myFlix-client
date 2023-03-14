@@ -6,7 +6,7 @@ import { MOVIE_API_URL } from "../../config";
 import "./login-view.scss";
 
 
-export const LoginView = ({ onLoggedIn }) => {
+export const LoginView = ({ onLoggedIn, notify }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useNavigate();
@@ -30,6 +30,7 @@ const handleSubmit = (event) => {
     })
     .catch((e) => {
       console.log("Login error: ", e);
+      notify("Error while logging in. Please try again.", "error");
     });
 };
 

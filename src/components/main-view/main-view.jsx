@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react"; 
+import { useState, useEffect, useMemo } from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
@@ -6,7 +6,9 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { Row, Col} from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Row, Col } from "react-bootstrap";
 import { MOVIE_API_URL } from "../../config";
 
 import axios from "axios";
@@ -21,7 +23,6 @@ export const MainView = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
   const [clickedMovie, setClickedMovie] = useState(null);
-
 
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -51,6 +52,19 @@ export const MainView = () => {
         console.log(error);
       });
   }, [token]);
+
+  const notify = (msg, type = "info") => {
+    toast[type](msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
   const filteredMovies = useMemo(() => {
     let filtered = [...movies];
@@ -96,6 +110,8 @@ export const MainView = () => {
         </div>
         <div className="space-class"></div>
 
+        <ToastContainer />
+
         <Routes>
           <Route
             path="/signup"
@@ -126,6 +142,7 @@ export const MainView = () => {
                         localStorage.setItem("token", token);
                         localStorage.setItem("user", JSON.stringify(user));
                       }}
+                      notify={notify}
                     />
                   </Col>
                 )}
@@ -142,11 +159,11 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                      <Col>
-                        {clickedMovie ? (
-                          <MovieView user={user} movie={clickedMovie} />
-                        ) : null}
-                      </Col>
+                    <Col>
+                      {clickedMovie ? (
+                        <MovieView user={user} movie={clickedMovie} />
+                      ) : null}
+                    </Col>
                   </>
                 )}
               </>
