@@ -15,7 +15,7 @@ export const ProfileView = () => {
   const [birthday, setBirthday] = useState("");
   const [displayForm, setDisplayForm] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const [formPassword, setFormPassword] = useState("********");
+  const [formPassword, setFormPassword] = useState("");
   // Declare state variables for the modal
   const [showModal, setShowModal] = useState(false);
   const [modalPassword, setModalPassword] = useState("");
@@ -103,6 +103,7 @@ export const ProfileView = () => {
     if (res) {
       passwordInput.classList.remove("form-control-focus");
       alert("User details updated successfully!");
+      notify("User details updated successfully!");
       setUser(res);
       localStorage.setItem("user", JSON.stringify(res));
       setUpdateSuccess(true);
@@ -146,7 +147,7 @@ export const ProfileView = () => {
       {/* Displaying a message if the update was successful */}
       {updateSuccess && (
         <Row className="update-success-message">
-          <Col>
+          <Col className="update-success-message-text">
             <p>Profile information has been recently updated.</p>
           </Col>
         </Row>
@@ -183,8 +184,8 @@ export const ProfileView = () => {
         {displayForm ? (
           <Col className="profile">
             <Form className="form-container" onSubmit={(e) => {
-              e.preventDefault();
-              setDeleteClicked(false);
+                e.preventDefault();
+                setDeleteClicked(false);
               setShowModal(true)
               }}>
               <Form.Group controlId="formUsername" className="form-group">
@@ -199,13 +200,13 @@ export const ProfileView = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formPassword" className="form-group">
+            <Form.Group controlId="formPassword" className="form-group">
                 <Form.Label className="form-label">Password:</Form.Label>
                 <Form.Control
                   className="form-control"
                   type="password"
                   placeholder="Enter new password"
-                  defaultValue="********"
+                  defaultValue=""
                   onChange={(e) => setFormPassword(e.target.value)}
                 />
               </Form.Group>
@@ -233,10 +234,10 @@ export const ProfileView = () => {
 
               {/* Showing a modal to confirm changes */}
               {/* Renish: Converted modal into another component */}
-              <ConfirmModal 
-                show={showModal} 
-                setShowModal={setShowModal} 
-                modalPassword={modalPassword} 
+              <ConfirmModal
+                show={showModal}
+                setShowModal={setShowModal}
+                modalPassword={modalPassword}
                 setModalPassword={setModalPassword}
                 handleModalConfirm={handleModalConfirm}
               />
