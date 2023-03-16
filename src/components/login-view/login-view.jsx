@@ -23,6 +23,7 @@ const handleSubmit = (event) => {
       console.log("Login response: ", response);
       if (response.data.user) {
         onLoggedIn(response.data.user, response.data.token);
+        notify("You are now logged in!", "success");
         history.push("/");
       } else {
         alert("No such user");
@@ -30,9 +31,12 @@ const handleSubmit = (event) => {
     })
     .catch((e) => {
       console.log("Login error: ", e);
-      notify("Error while logging in. Please try again.", "error");
+      if (e.response && e.response.status !== 200) {
+        notify("Error while logging in. Please try again.", "error");
+      }
     });
 };
+
 
 
   return (
