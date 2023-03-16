@@ -56,7 +56,7 @@ export const MainView = () => {
   const notify = (msg, type = "info") => {
     toast[type](msg, {
       position: "top-right",
-      autoClose: 3000,
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -201,6 +201,7 @@ export const MainView = () => {
                           user={user}
                           movie={movie}
                           onMovieClick={() => setClickedMovie(movie)}
+                          
                         />
                       </Col>
                     ))}

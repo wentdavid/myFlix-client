@@ -1,10 +1,19 @@
 /* Update success message */
 .update-success-message {
-    text-align: center;
+    display: flex;
     padding: 1rem;
     background-color: #262626;
     color: #fff;
     border-radius: 30px;
+    margin: 30px;
+    max-width: fit-content;
+}
+
+.update-success-message-text {
+    position: relative;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
 }
 
 /* Form toggle button container */

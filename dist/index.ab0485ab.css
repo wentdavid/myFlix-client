@@ -12402,11 +12402,21 @@ body {
 }
 
 .update-success-message {
-  text-align: center;
   color: #fff;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
   background-color: #262626;
   border-radius: 30px;
+  margin: 30px;
   padding: 1rem;
+  display: flex;
+}
+
+.update-success-message-text {
+  text-align: center;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
 }
 
 .form-toggle-button-container {
