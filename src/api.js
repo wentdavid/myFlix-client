@@ -91,6 +91,29 @@ const updateUser = async ({ Username, Password, Email, Birthday }) => {
     });
 };
 
+const signUpUser = async ({ Username, Password, Email, Birthday }) => {
+  return axios
+    .post(
+      `${MOVIE_API_URL}/users`,
+      { Username, Password, Email, Birthday },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log("Error while signing up user", error);
+      alert("Error while signing up user, try again or contact admin");
+      return null;
+    });
+};
+
+
+
 const getAllMovies = async () => {
   return axios
     .get(
@@ -117,5 +140,6 @@ export default api = {
     getUser,
     deleteUser,
     updateUser,
+    signUpUser,
     getAllMovies,
 }
