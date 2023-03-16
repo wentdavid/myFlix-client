@@ -51414,7 +51414,7 @@ const getAllMovies = async ()=>{
         return null;
     });
 };
-exports.default = api = {
+const api = {
     verifyPassword,
     getUser,
     deleteUser,
@@ -51422,6 +51422,7 @@ exports.default = api = {
     signUpUser,
     getAllMovies
 };
+exports.default = api;
 
 },{"./config":"jtCLN","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2vVqf":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$3c12 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");

@@ -135,11 +135,13 @@ const getAllMovies = async () => {
     });
 };
 
-export default api = {
-    verifyPassword,
-    getUser,
-    deleteUser,
-    updateUser,
-    signUpUser,
-    getAllMovies,
-}
+const api = {
+  verifyPassword,
+  getUser,
+  deleteUser,
+  updateUser,
+  signUpUser,
+  getAllMovies,
+};
+
+export default api;
