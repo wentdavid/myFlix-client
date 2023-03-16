@@ -52065,9 +52065,10 @@ const clearAndForceLogout = ()=>{
     localStorage.removeItem("user");
     window.location = "/login";
 };
-exports.default = helper = {
+const helper = {
     clearAndForceLogout
 };
+exports.default = helper;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bsPVM":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$abf5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");

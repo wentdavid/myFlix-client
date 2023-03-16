@@ -4,6 +4,8 @@ const clearAndForceLogout = () => {
     window.location = "/login";
 }
 
-export default helper = {
-    clearAndForceLogout,
-}
+const helper = {
+  clearAndForceLogout,
+};
+
+export default helper;
