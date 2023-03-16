@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Navigate } from "react-router-dom";
-import { MOVIE_API_URL } from "../../config";
+import api from "../../api";
 import "./signup-view.scss";
 
 export const SignupView = () => {
@@ -12,7 +12,7 @@ export const SignupView = () => {
   const [birthday, setBirthday] = useState("");
   const [redirect, setRedirect] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
@@ -22,7 +22,7 @@ export const SignupView = () => {
       Birthday: birthday,
     };
 
-    fetch(`${MOVIE_API_URL}/users`, {
+   /*  fetch(`${MOVIE_API_URL}/users`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -36,6 +36,18 @@ export const SignupView = () => {
         alert("Signup failed");
       }
     });
+  };
+ */
+
+
+   const response = await api.signUpUser(data);
+
+    if (response) {
+      alert("Signup successful");
+      setRedirect(true);
+    } else {
+      alert("Signup failed");
+    }
   };
 
   if(redirect) {
